@@ -251,8 +251,14 @@ if (isset($_POST['envia_Comerciante'])) {
             if (isset($dados['cep'])) {
                 $cep = $dados['cep'];
             }
+            if (isset($dados['logradouro'])) {
+                $logradouro= $dados['logradouro'];
+            }
             if (isset($dados['numero'])) {
                 $numero = $dados['numero'];
+            }
+            if (isset($dados['complemento'])) {
+                $numero = $dados['complemento'];
             }
             if (isset($dados['latitude'])) {
                 $latitude = $dados['latitude'];
@@ -267,13 +273,13 @@ if (isset($_POST['envia_Comerciante'])) {
         </div>
         <div class="tex12 ">
             <label for="logradouro" class="labelInput"> Logradouro:</label>
-            <input type="text" name="logradouro" class="inputUser ">
+            <input type="text" name="logradouro" class="inputUser " value="<?php echo $logradouro; ?>">
 
             <label for="numero" class="labelInput"> Numero:</label>
-            <input type="text" name="numero" class="inputUser ">
+            <input type="text" name="numero" class="inputUser " value="<?php echo $numero; ?>">
 
             <label for="complemento" class="labelInput"> Complemento:</label>
-            <input type="text" name="complemento" class="inputUser ">
+            <input type="text" name="complemento" class="inputUser " value="<?php echo $complemento; ?>">
 
 
         </div>
