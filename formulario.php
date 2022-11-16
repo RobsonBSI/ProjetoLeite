@@ -251,6 +251,15 @@ if (isset($_POST['envia_Comerciante'])) {
             if (isset($dados['cep'])) {
                 $cep = $dados['cep'];
             }
+            if (isset($dados['numero'])) {
+                $numero = $dados['numero'];
+            }
+            if (isset($dados['latitude'])) {
+                $latitude = $dados['latitude'];
+            }
+            if (isset($dados['longitude'])) {
+                $longitude = $dados['longitude'];
+            }
         ?>
         <div class="tex12 ">
             <label for="cep" class="labelInput"> CEP:</label>
