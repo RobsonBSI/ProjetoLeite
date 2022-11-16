@@ -1,0 +1,82 @@
+body,html {
+
+    margin: 0;
+    background: rgba(240, 253, 238, 0.11);
+    float: none;
+
+}
+.leite {
+    position: relative;
+    height: 40vh;
+    width: 100vw;
+    background: url('../imagem/leite.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position:center;
+}
+
+.legendas{
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+}
+.orga{
+    padding-left:10%;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: justify;
+}
+.p2{
+    height:100%;
+    margin-top:1%;
+    margin-bottom:2%;
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #26f607;
+}
+
+.button1:hover {
+    background-color: #b8f3af;
+    color: #0a62b9;
+}
+
+.button2 {
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(226, 19, 19);
+}
+
+.button2:hover {
+    background-color: #eea0a0;
+    color: #e21313;
+}
+.button3 {
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(19, 47, 226);
+}
+
+.button3:hover {
+    background-color: #a0ebee;
+    color: #e21313;
+}

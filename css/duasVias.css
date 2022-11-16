@@ -1,0 +1,15 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+#esquerda{
+   margin-left:2%;
+    width: 46%;
+    float:left;
+}
+#direita{
+    margin-right: 2% ;
+    width: 46%;
+    float:right;
+
+}
