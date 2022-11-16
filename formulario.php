@@ -292,7 +292,7 @@ if (isset($_POST['envia_Comerciante'])) {
             <label for="longitude" class="labelInput required"> Longitude(use graus
                 decimais):</label>
             <input type="text" name="longitude" placeholder="ex:-43.36274894571893"
-                   class="inputUser">
+                   class="inputUser" value="<?php echo $longitude; ?>">
         </div>
         <div class="tex12">
             <label for="cidade" class="labelInput required"> Cidade:</label>
