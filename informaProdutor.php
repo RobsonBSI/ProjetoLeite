@@ -145,7 +145,8 @@
             <div style="text-align: center">
                 <a class="button button1" href="tabela.php?id_aprovado= <?php echo $identrada; ?>">Aprovado</a>
                 <a class="button button2" href="tabela.php?id= <?php echo $identrada; ?>">Rejeitar</a>
-                <a class="button button3" href="tabela.php" >voltar</a>
+                <a class="button button3" href="EditarProdutor.php?id= <?php echo $identrada;?>"> Editar</a>
+                <a class="button button4" href="tabela.php" >voltar</a>
             </div>
 
         </form>

@@ -109,21 +109,12 @@
                                 echo "<b>Data e Hora :</b> $v  <br>";
                             }
 
+                            if ($key == "produtor") {
 
-                        }
-                        for ($i = 0; $i < count( $ret); $i++) {
-                            foreach ($ret[$i] as $k => $v4) {
-                                if ($k== "outro") {
-                                    if (empty($Produtor)) {
-                                        $Produtor= $v4;
-                                    } else {
-                                        $Produtor =  $Produtor . " - " . $v4;
-                                    }
-                                }
-
-
+                                echo " <b>Produtores que tem produto na Loja: </b>$v <br>";
                             }
                         }
+
                         for ($j = 0; $j < count($prod); $j++) {
                             foreach ( $prod[$j] as $k1 => $v2) {
                                 if ($k1== "produto") {
@@ -135,7 +126,7 @@
                                 }
                             }
                         }
-                        echo " <b>Produtores que tem produto na Loja: </b> $Produtor <br>";
+
                         echo " <b>Produtos: </b> $Produto";
                     ?>
 
@@ -205,22 +196,13 @@
                             if ($key == "cadastro") {
                                 echo "<b>Data e Hora : </b>$v  <br>";
                             }
+                            if ($key == "produtor") {
 
-
-                        }
-                        for ($i = 0; $i < count( $ret); $i++) {
-                            foreach ($ret[$i] as $k => $v4) {
-                                if ($k== "outro") {
-                                    if (empty($Produtor)) {
-                                        $Produtor= $v4;
-                                    } else {
-                                        $Produtor =  $Produtor . " - " . $v4;
-                                    }
-                                }
-
-
+                                echo " <b>Produtores que tem produto na Loja: </b>$v <br>";
                             }
+
                         }
+
                         for ($j = 0; $j < count($prod); $j++) {
                             foreach ( $prod[$j] as $k1 => $v2) {
                                 if ($k1== "produto") {
@@ -232,7 +214,7 @@
                                 }
                             }
                         }
-                        echo " <b>Produtores que tem produto na Loja: </b> $Produtor <br>";
+
                         echo " <b>Produtos: </b> $Produto";
 
                     ?>
@@ -297,21 +279,12 @@
                             if ($key == "cadastro") {
                                 echo "<b>Data e Hora :</b> $v  <br>";
                             }
+                            if ($key == "produtor") {
 
-
-                        }
-                        for ($i = 0; $i < count( $ret); $i++) {
-                            foreach ($ret[$i] as $k => $v4) {
-                                if ($k== "outro") {
-                                    if (empty($Produtor)) {
-                                        $Produtor= $v4;
-                                    } else {
-                                        $Produtor =  $Produtor . " - " . $v4;
-                                    }
-                                }
-
-
+                                echo " <b>Produtores que tem produto na Loja: </b>$v <br>";
                             }
+
+
                         }
                         for ($j = 0; $j < count($prod); $j++) {
                             foreach ( $prod[$j] as $k1 => $v2) {
@@ -324,7 +297,7 @@
                                 }
                             }
                         }
-                        echo " <b>Produtores que tem produto na Loja: </b> $Produtor <br>";
+
                         echo " <b>Produtos: </b> $Produto";
                     ?>
 
@@ -391,23 +364,15 @@
                             }
                             if ($key == "cadastro") {
                                 echo "<b>Data e Hora : </b>$v  <br>";
-                            }
 
+                            }
+                            if ($key == "produtor") {
+
+                                echo " <b>Produtores que tem produto na Loja: </b>$v <br>";
+                            }
 
                         }
-                        for ($i = 0; $i < count( $ret); $i++) {
-                            foreach ($ret[$i] as $k => $v4) {
-                                if ($k== "outro") {
-                                  if (empty($Produtor)) {
-                                      $Produtor= $v4;
-                                  } else {
-                                      $Produtor =  $Produtor . " - " . $v4;
-                                  }
-                            }
 
-
-                            }
-                        }
                         for ($j = 0; $j < count($prod); $j++) {
                             foreach ( $prod[$j] as $k1 => $v2) {
                                 if ($k1== "produto") {
@@ -419,7 +384,7 @@
                                 }
                             }
                         }
-                        echo " <b>Produtores que tem produto na Loja: </b> $Produtor <br>";
+
                         echo " <b>Produtos: </b> $Produto";
                     ?>
 
@@ -435,7 +400,8 @@
 
                 <a class="button button1" href="tabelaComercio.php?id_aprovado= <?php echo $identrada; ?>">Aprovado</a>
                 <a class="button button2" href="tabelaComercio.php?id= <?php echo $identrada; ?>">Rejeitar</a>
-                <a class="button button3" href="tabelaComercio.php" >voltar</a>
+                <a class="button button3" href="editarComercio.php?id= <?php echo $identrada;?>"> Editar</a>
+                <a class="button button4" href="tabelaComercio.php" >voltar</a>
             </div>
         </form>
 

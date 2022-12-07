@@ -1,18 +1,13 @@
 <?php
-    require_once 'Class/ClassTipo.php';
+
     require_once 'Class/ClassProduto.php';
-    require_once 'Class/ClassProdutor.php';
     require_once 'Class/ClassPontoVenda.php';
-    require_once 'Class/ClassProduto_Produtor.php';
     require_once 'Class/ClassProduto_Ponto_Venda.php';
-    require_once 'Class/ClassComercio_Produtor.php';
+
     $pro = new ClassProduto("localhost", "leiteorganico", "postgres", "admin");
-    $p = new ClassProdutor("localhost", "leiteorganico", "postgres", "admin");
-    $t = new ClassTipo("localhost", "leiteorganico", "postgres", "admin");
     $pv = new ClassPontoVenda("localhost", "leiteorganico", "postgres", "admin");
-    $pp = new ClassProduto_Produtor("localhost", "leiteorganico", "postgres", "admin");
     $ppv = new ClassProduto_Ponto_Venda("localhost", "leiteorganico", "postgres", "admin");
-    $cp = new ClassComercio_Produtor("localhost", "leiteorganico", "postgres", "admin");
+
 ?>
 
 
@@ -35,7 +30,7 @@
 <?php
 
     $id = isset($_GET["id"]) ? $_GET["id"] : null;
-    $produtorVendas = $cp-> BuscarComercioProdutor($id);
+
 
 
     $RetorProdu = $ppv->BuscarComercioProduto($id);
@@ -75,9 +70,7 @@
         if ($key == "termino") {
             $ter = $v;
         }
-        if ($key == "semana") {
-            $sema = $v;
-        }
+
 
         if ($key == "cep") {
             $cep = $v;
@@ -107,13 +100,22 @@
         if ($key == "telefone") {
             $tel = $v;
         }
+        if ($key == "data_aprovacao") {
+            $ok = $v;
+        }
+        if ($key == "semana") {
+            $sema = $v;
+        }
+        if ($key == "produtor") {
+            $prod= $v;
+        }
         if ($key == "tipo_id") {
             $tipo_ID = $v;
         }
 
 
     }
-   
+   echo  $ok;
 ?>
 
 <nav class="leite">
@@ -172,19 +174,19 @@
                 if ($venda == "Feira") {
 
                     ?>
-
-                    <label class="labelInput required"> dias da semana:</label>
-                    <input type="text" name="horarioInicio" class="inputUser1" value=" <?php echo $sema; ?>">
+            <div class="tex12 ">
+                    <label class="labelInput required"> Dias da semana:</label>
+                    <input type="text" name="semana" class="inputUser " value=" <?php echo $sema; ?>">
 
                     <div class="labelInput  ">
                         Horario de:
-                        <input type="text" name="horarioInicio" class="inputUser1" value=" <?php echo $ini; ?>"> as
+                        <input type="text" name="horarioInicio" class="inputUser " value=" <?php echo $ini; ?>"> as
                         <input type="text"
                                name="horarioTermino"
-                               class="inputUser1" value=" <?php echo $ter; ?>">
+                               class="inputUser " value=" <?php echo $ter; ?>">
                     </div>
 
-
+            </div>
                     <?php
                 }
 
@@ -256,7 +258,7 @@
                 <input type="text" name="cidade" class="inputUser" value=" <?php echo $cida; ?>">
 
                 <label for="estado" class="labelInput"> Estado:</label>
-                <select id="estado" name="estado" class="inputUser ">
+                <select id="estado" name="estado" class="inputUser required">
                     <option value="AC" <?php echo $es == 'AC' ? 'selected' : ''; ?> >Acre</option>
                     <option value="AL" <?php echo $es == 'AL' ? 'selected' : ''; ?> >Alagoas</option>
                     <option value="AP" <?php echo $es == 'AP' ? 'selected' : ''; ?> >Amapá</option>
@@ -286,45 +288,15 @@
                     <option value="TO" <?php echo $es == 'TO' ? 'selected' : ''; ?> >Tocantins</option>
                 </select>
             </div>
-
         </fieldset>
         <fieldset>
-            <table>
+
             <legend class="legendas">Cadastro em relação Fornecimento:</legend>
+            <div class="tex12">
+                <label for="produtor" class="labelInput "> Produtores que tem produto na Loja:</label>
+                <input type="text" name="produtor" class="inputUser" value=" <?php echo $prod; ?>">
+            </div>
 
-            <?php
-
-                if (count($produtorVendas) > 0) {
-
-                for ($z = 0; $z < count($produtorVendas); $z++) {
-                    foreach ($produtorVendas[$z]  as $y => $x) {
-                        if ($y == "id") {
-                            $identradaProdutorVenda = $x;
-                        }
-                        if ($y == "outro") {
-                            $outro = $x
-                            ?>
-                            <div id="formulario">
-                                <div class="form-group  ">
-                                    <label class="labelInput ">Produtor: </label>
-                                    <input type="text" name="produtor1[]" class="inputUser" value="<?php  echo  $outro;  ?>">
-
-                                    <a type="button" class="btn btn-outline-danger"  href="editarComercio.php?id_Apagar= <?php echo  $identradaProdutorVenda; ?>">Excluir</a>
-
-                            <?php
-                        }
-                    }
-
-                }
-                }
-            ?>
-                                    <button type="button" id="add_campo"
-                                            style=" border: 2px solid #4CAF50; background-color: white; padding: 0.4% 0.8%;  font-size: 16px;">
-                                        +
-                                    </button>
-                                </div>
-                                     </div>
-            </table>
             <table>
             <label for="produtoF" class="labelInput required"> Produtos comercializados :</label>
             <?php
@@ -405,27 +377,25 @@
 
         <div style="text-align: center">
             <button type="submit" name="altera_Comercio" class="button button1" value="Enviar">Altera</button>
-            <a class="button button3" href="tabelaComercioAprovado.php" >voltar</a>
+            <?php
+                if(empty($ok)){
+            ?>
+                    <a class="button button3" href="tabelaComercio.php" >voltar</a>
+                    <?php
+                }else{
+                    ?>
+                    <a class="button button3" href="tabelaComercioAprovado.php" >voltar</a>
+                    <?php
+                }
+            ?>
+
 
         </div>
 
     </form>
 
 </div>
-<script>
-    var cont = 1;
 
-    $('#add_campo').click(function () {
-        cont++;
-        //https://api.jquery.com/append/
-        $('#formulario').append('<div class="form-group" id="campo' + cont + '"> <label class="labelInput ">Produtor: </label><input type="text" name="produtor1[]" class="inputUser"> <button type="button" id="' + cont + '" class="btn-apagar" style=" border: 2px solid #ff0000; background-color: white; padding: 0.4% 0.8%; font-size: 16px;"> - </button></div>');
-    });
-
-    $('form').on('click', '.btn-apagar', function () {
-        var button_id = $(this).attr("id");
-        $('#campo' + button_id + '').remove();
-    });
-</script>
 
 </body>
 </html>

@@ -72,11 +72,21 @@ body,html {
 }
 .button3 {
     background-color: white;
-    color: black;
+    color: #fd480c;
     border: 2px solid rgb(19, 47, 226);
 }
 
 .button3:hover {
     background-color: #a0ebee;
-    color: #e21313;
+    color: #0713ff;
+}
+.button4 {
+    background-color: white;
+    color: #fd480c;
+    border: 2px solid rgb(7, 7, 7);
+}
+
+.button4:hover{
+    background-color:#a0ebee;
+    color: #070707;
 }

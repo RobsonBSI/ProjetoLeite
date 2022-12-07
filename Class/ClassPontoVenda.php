@@ -34,12 +34,10 @@
         }
 
 
-        public function CadastrarPontoVenda($nome,$semana,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$tipo,$cadastro)
+        public function CadastrarPontoVenda($nome,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$tipo,$cadastro,$semana,$produtor)
         {
-            $comando=$this->conexao->prepare( " INSERT INTO pontovenda(nome,semana,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,tipo_id,cadastro)   VALUES(:nome,:se,:hInicio,:hTermino,:regiao,:telefone,:site,:cep,:logradouro,:numero,:complemento,:latitude,:longitude,:cidade,:estado,:tipo,:ca)" );
-
+            $comando=$this->conexao->prepare( " INSERT INTO pontovenda(nome,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,tipo_id,cadastro,semana,produtor)   VALUES(:nome,:hInicio,:hTermino,:regiao,:telefone,:site,:cep,:logradouro,:numero,:complemento,:latitude,:longitude,:cidade,:estado,:tipo,:ca,:se,:prod)" );
             $comando ->bindValue(':nome',$nome);
-            $comando ->bindValue(':se',$semana);
             $comando ->bindValue(':hInicio',$inicio);
             $comando ->bindValue(':hTermino',$termino);
             $comando ->bindValue(':regiao',$regiao);
@@ -55,6 +53,9 @@
             $comando ->bindValue(':estado',$estado);
             $comando ->bindValue(':tipo',$tipo);
             $comando ->bindValue(':ca',$cadastro);
+            $comando ->bindValue(':se',$semana);
+            $comando ->bindValue(':prod',$produtor);
+
             $comando ->execute();
             $resposta = $this->conexao->lastInsertId();
             return  $resposta;
@@ -76,7 +77,7 @@
         }
         public function BuscarAprovacao(){
             $resposta=array();
-            $comando=$this->conexao->query("SELECT p.id,nome,semana,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,data_aprovacao,t.venda FROM pontovenda p INNER JOIN tipo t ON t.id =p.tipo_id where data_aprovacao is not null");
+            $comando=$this->conexao->query("SELECT p.id,nome,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,data_aprovacao,semana,produtor,t.venda FROM pontovenda p INNER JOIN tipo t ON t.id =p.tipo_id where data_aprovacao is not null");
             $resposta= $comando->fetchAll(PDO::FETCH_ASSOC);
             return  $resposta;
         }

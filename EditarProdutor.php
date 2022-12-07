@@ -88,6 +88,9 @@
         if ($key == "telefone") {
             $tel = $v;
         }
+        if ($key == "data_aprovacao") {
+            $ok = $v;
+        }
         if ($key == "cadastro") {
             $cas = $v;
         }
@@ -300,7 +303,18 @@
         </div>
         <div style="text-align: center">
             <button type="submit" name="altera_Produtor" class="button button1" value="Enviar">Altera</button>
-             <a class="button button3" href="tabelaAprovado.php" >voltar</a>
+            <?php
+                if(empty($ok)){
+                    ?>
+                    <a class="button button3" href="tabela.php" >voltar</a>
+                    <?php
+                }else{
+                    ?>
+                    <a class="button button3" href="tabelaAprovado.php" >voltar</a>
+                    <?php
+                }
+            ?>
+
 
         </div>
 
