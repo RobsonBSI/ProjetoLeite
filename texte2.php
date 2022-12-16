@@ -49,9 +49,9 @@
     $dCadastro = date('d/m/Y H:i:s');
 
     if (isset($_POST["envia_Produtor"])) {
-
+var_dump($_POST);
         $inf = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
+/*
         if (empty($inf['produtor'])) {
             echo " <script>alert('Erro:  Necessário preencher o campo nome!');</script>";
         } elseif (empty($inf['cep'])) {
@@ -94,6 +94,7 @@
             header("location:formulario.php");
 
         }
+*/
     }
 
 
@@ -163,7 +164,7 @@
 
             date_default_timezone_set('America/Fortaleza');
             $dCadastro = date('d/m/Y H:i:s');
-            $id_PontoVenda = $pv->CadastrarPontoVenda($nome, $inicio, $termino, $regiao, $telefone, $site, $cep, $logradouro, $numero, $complemento, $latitude, $longitude, $cidade, $estado, $tipo, $dCadastro, $sema,$proCadastrado);
+            $id_PontoVenda = $pv->CadastrarPontoVenda($nome, $inicio, $termino, $regiao, $telefone, $site, $cep, $logradouro, $numero, $complemento, $latitude, $longitude, $cidade, $estado, $tipo, $dCadastro, $sema, $proCadastrado);
 
             if (!empty($produtosFornecidos)) {
                 foreach ($produtosFornecidos as $key => $v) {

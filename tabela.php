@@ -119,7 +119,7 @@ if($id_A){
 
     ?>
     <td>
-        <a type="button" class="btn btn-outline-info"
+        <a type="button" class="btn btn-outline-secondary"
            href="informaProdutor.php?id= <?php echo $dados[$i]['id']; ?>">Ver informações</a>
         <a type="button" class="btn btn-outline-danger" href="tabela.php?id= <?php echo$dados[$i]['id'];?>">Rejeitar</a>
         <a type="button" class="btn btn-outline-success" href="tabela.php?id_aprovado= <?php echo$dados[$i]['id'];?>">Aprovado</a>

@@ -88,7 +88,7 @@
             $cida = $v;
         }
         if ($key == "estado") {
-            $es = $v;
+            $est = $v;
         }
         if ($key == "longitude") {
             $long = $v;
@@ -115,7 +115,7 @@
 
 
     }
-   echo  $ok;
+   echo  $est;
 ?>
 
 <nav class="leite">
@@ -126,7 +126,7 @@
 </nav>
 <!-- formulario para o comercio -->
 <div class="p2">
-    <form method="post" action="alteracao.php">
+    <form method="post" action="alteracao.php" id="forComercio" name="forComercio">
 
         <fieldset>
             <legend class="legendas">Dados Cadastrais</legend>
@@ -253,41 +253,42 @@
                 <label for="longitude" class="labelInput "> Longitude (use graus decimais):</label>
                 <input type="text" name="longitude" value=" <?php echo $long; ?>" class="inputUser">
             </div>
-            <div class="tex12">
+
                 <label for="cidade" class="labelInput ">Cidade:</label>
                 <input type="text" name="cidade" class="inputUser" value=" <?php echo $cida; ?>">
-
                 <label for="estado" class="labelInput"> Estado:</label>
-                <select id="estado" name="estado" class="inputUser required">
-                    <option value="AC" <?php echo $es == 'AC' ? 'selected' : ''; ?> >Acre</option>
-                    <option value="AL" <?php echo $es == 'AL' ? 'selected' : ''; ?> >Alagoas</option>
-                    <option value="AP" <?php echo $es == 'AP' ? 'selected' : ''; ?> >Amapá</option>
-                    <option value="AM" <?php echo $es == 'AM' ? 'selected' : ''; ?> >Amazonas</option>
-                    <option value="BA" <?php echo $es == 'BA' ? 'selected' : ''; ?> >Bahia</option>
-                    <option value="CE" <?php echo $es == 'CE' ? 'selected' : ''; ?> >Ceará</option>
-                    <option value="DF" <?php echo $es == 'DF' ? 'selected' : ''; ?> >Distrito Federal</option>
-                    <option value="ES" <?php echo $es == 'ES' ? 'selected' : ''; ?> >Espírito Santo</option>
-                    <option value="GO" <?php echo $es == 'GO' ? 'selected' : ''; ?> >Goiás</option>
-                    <option value="MA" <?php echo $es == 'MA' ? 'selected' : ''; ?> >Maranhão</option>
-                    <option value="MT" <?php echo $es == 'MT' ? 'selected' : ''; ?> >Mato Grosso</option>
-                    <option value="MS" <?php echo $es == 'MS' ? 'selected' : ''; ?> >Mato Grosso do Sul</option>
-                    <option value="MG" <?php echo $es == 'MG' ? 'selected' : ''; ?> >Minas Gerais</option>
-                    <option value="PA" <?php echo $es == 'PA' ? 'selected' : ''; ?> >Pará</option>
-                    <option value="PB" <?php echo $es == 'PB' ? 'selected' : ''; ?> >Paraíba</option>
-                    <option value="PR" <?php echo $es == 'PR' ? 'selected' : ''; ?> >Paraná</option>
-                    <option value="PE" <?php echo $es == 'PE' ? 'selected' : ''; ?> >Pernambuco</option>
-                    <option value="PI" <?php echo $es == 'PI' ? 'selected' : ''; ?> >Piauí</option>
-                    <option value="RJ" <?php echo $es == 'RJ' ? 'selected' : ''; ?> >Rio de Janeiro</option>
-                    <option value="RN" <?php echo $es == 'RN' ? 'selected' : ''; ?> >Rio Grande do Norte</option>
-                    <option value="RS" <?php echo $es == 'RS' ? 'selected' : ''; ?> >Rio Grande do Sul</option>
-                    <option value="RO" <?php echo $es == 'RO' ? 'selected' : ''; ?> >Rondônia</option>
-                    <option value="RR" <?php echo $es == 'RR' ? 'selected' : ''; ?> >Roraima</option>
-                    <option value="SC" <?php echo $es == 'SC' ? 'selected' : ''; ?> >Santa Catarina</option>
-                    <option value="SP" <?php echo $es == 'SP' ? 'selected' : ''; ?> >São Paulo</option>
-                    <option value="SE" <?php echo $es == 'SE' ? 'selected' : ''; ?> >Sergipe</option>
-                    <option value="TO" <?php echo $es == 'TO' ? 'selected' : ''; ?> >Tocantins</option>
-                </select>
-            </div>
+            <select id="estado1" name="estado" class="inputUser required">
+                <option value="AC" <?php echo $est == 'AC' ? 'selected' : ''; ?> >Acre</option>
+                <option value="AL" <?php echo $est == 'AL' ? 'selected' : ''; ?> >Alagoas</option>
+                <option value="AP" <?php echo $est == 'AP' ? 'selected' : ''; ?> >Amapá</option>
+                <option value="AM" <?php echo $est == 'AM' ? 'selected' : ''; ?> >Amazonas</option>
+                <option value="BA" <?php echo $est == 'BA' ? 'selected' : ''; ?> >Bahia</option>
+                <option value="CE" <?php echo $est == 'CE' ? 'selected' : ''; ?> >Ceará</option>
+                <option value="DF" <?php echo $est == 'DF' ? 'selected' : ''; ?> >Distrito Federal</option>
+                <option value="ES" <?php echo $est == 'ES' ? 'selected' : ''; ?> >Espírito Santo</option>
+                <option value="GO" <?php echo $est == 'GO' ? 'selected' : ''; ?> >Goiás</option>
+                <option value="MA" <?php echo $est == 'MA' ? 'selected' : ''; ?> >Maranhão</option>
+                <option value="MT" <?php echo $est == 'MT' ? 'selected' : ''; ?> >Mato Grosso</option>
+                <option value="MS" <?php echo $est == 'MS' ? 'selected' : ''; ?> >Mato Grosso do Sul</option>
+                <option value="MG" <?php echo $est == 'MG' ? 'selected' : ''; ?> >Minas Gerais</option>
+                <option value="PA" <?php echo $est == 'PA' ? 'selected' : ''; ?> >Pará</option>
+                <option value="PB" <?php echo $est == 'PB' ? 'selected' : ''; ?> >Paraíba</option>
+                <option value="PR" <?php echo $est == 'PR' ? 'selected' : ''; ?> >Paraná</option>
+                <option value="PE" <?php echo $est == 'PE' ? 'selected' : ''; ?> >Pernambuco</option>
+                <option value="PI" <?php echo $est == 'PI' ? 'selected' : ''; ?> >Piauí</option>
+                <option value="RJ" <?php echo $est== 'RJ' ? 'selected' : ''; ?> >Rio de Janeiro</option>
+                <option value="RN" <?php echo $est == 'RN' ? 'selected' : ''; ?> >Rio Grande do Norte</option>
+                <option value="RS" <?php echo $est == 'RS' ? 'selected' : ''; ?> >Rio Grande do Sul</option>
+                <option value="RO" <?php echo $est == 'RO' ? 'selected' : ''; ?> >Rondônia</option>
+                <option value="RR" <?php echo $est == 'RR' ? 'selected' : ''; ?> >Roraima</option>
+                <option value="SC" <?php echo $est == 'SC' ? 'selected' : ''; ?> >Santa Catarina</option>
+                <option value="SP" <?php echo $est == 'SP' ? 'selected' : ''; ?> >São Paulo</option>
+                <option value="SE" <?php echo $est == 'SE' ? 'selected' : ''; ?> >Sergipe</option>
+                <option value="TO" <?php echo $est == 'TO' ? 'selected' : ''; ?> >Tocantins</option>
+
+
+            </select>
+
         </fieldset>
         <fieldset>
 
