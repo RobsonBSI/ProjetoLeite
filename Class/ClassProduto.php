@@ -19,7 +19,7 @@
         public function BuscarProduto()
         {
             $resposta = array();
-            $comando = $this->conexao->query("select * from produto order by id");
+            $comando = $this->conexao->query("select * from produto order by produto");
             $resposta = $comando->fetchAll(PDO::FETCH_ASSOC);
             return $resposta;
         }

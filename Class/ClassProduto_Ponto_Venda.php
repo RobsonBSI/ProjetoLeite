@@ -32,5 +32,10 @@
             return  $resposta;
 
         }
+        public function DeletarPPV($venda){
+            $comando=$this->conexao->prepare("DELETE FROM produto_venda WHERE venda =:id");
+            $comando->bindValue(":id",$venda);
+            $comando->execute();
+        }
 
     }

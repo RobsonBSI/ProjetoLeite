@@ -32,4 +32,11 @@
             return  $resposta;
 
         }
+
+        public function DeletarPP($produtor){
+            $comando=$this->conexao->prepare("DELETE FROM produto_produtor WHERE produtor =:id");
+            $comando->bindValue(":id",$produtor);
+            $comando->execute();
+        }
+
     }

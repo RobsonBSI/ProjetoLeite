@@ -82,5 +82,31 @@
             return  $resposta;
         }
 
+        public function atualizarVenda($id,$nome,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$semana,$produtor){
+            try {
+            $comando= $this->conexao->prepare("UPDATE pontovenda SET nome=:nome,inicio=:hInicio,termino=:hTermino,regiao=:regiao,telefone=:telefone,site=:site,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,latitude=:latitude,longitude=:longitude,cidade=:cidade,estado=:estado,semana=:se,produtor=:prod WHERE id =:id");
+            $comando ->bindValue(':id',$id);
+            $comando ->bindValue(':nome',$nome);
+            $comando ->bindValue(':hInicio',$inicio);
+            $comando ->bindValue(':hTermino',$termino);
+            $comando ->bindValue(':regiao',$regiao);
+            $comando ->bindValue(':telefone',$telefone);
+            $comando ->bindValue(':site',$site);
+            $comando ->bindValue(':cep',$cep);
+            $comando ->bindValue(':logradouro',$logradouro);
+            $comando ->bindValue(':numero',$numero);
+            $comando ->bindValue(':complemento',$complemento);
+            $comando ->bindValue(':latitude',$latitude);
+            $comando ->bindValue(':longitude',$longitude);
+            $comando ->bindValue(':cidade',$cidade);
+            $comando ->bindValue(':estado',$estado);
+            $comando ->bindValue(':se',$semana);
+            $comando ->bindValue(':prod',$produtor);
+            $comando ->execute();
+        } catch(PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+        }
 
+
+    }
     }

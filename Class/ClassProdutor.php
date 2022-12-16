@@ -28,7 +28,7 @@ class ClassProdutor
         $comando->execute();
 
      }
-    public function CadastrarProdutor( $produtor, $site,$instagram,$cep,$logradouro,$numero,$compremento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone,$dataCadastro){
+    public function CadastrarProdutor( $produtor, $site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone,$dataCadastro){
 
         $comando =$this->conexao->prepare('INSERT INTO produtor(nome,site,instagran,cep,logradouro,numero,complemento,cidade,estado,longitude,latitude,turismo,fazenda,online,telefone,cadastro) VALUES(:n,:s,:i,:cep,:lo,:nu,:co,:ci,:es,:logi,:lat,:tu,:vf,:vo,:tel,:dataC)');
         $comando ->bindValue(':n', $produtor);
@@ -37,7 +37,7 @@ class ClassProdutor
         $comando->bindValue(':cep', $cep);
         $comando ->bindValue(':lo',$logradouro);
         $comando->bindValue(':nu',   $numero	);
-        $comando->bindValue(':co',  $compremento);
+        $comando->bindValue(':co',  $complemento);
         $comando->bindValue(':ci', $cidade);
         $comando ->bindValue(':es', $estado);
         $comando->bindValue(':logi',$longitude);
@@ -72,6 +72,31 @@ class ClassProdutor
         $comando ->execute();
         $resposta = $comando->fetch(PDO::FETCH_ASSOC);
         return $resposta;
+    }
+
+    public function atualizarProdutor($id,$produtor,$site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone){
+
+        $comando= $this->conexao->prepare("UPDATE produtor SET nome=:nome,site=:site,instagran=:inst,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,cidade=:cidade,estado=:estado,latitude=:latitude,longitude=:longitude,turismo=:tu,fazenda=:vf,online=:vo,telefone=:telefone WHERE id =:id");
+        $comando ->bindValue(':id',$id);
+        $comando ->bindValue(':nome',$produtor);
+        $comando ->bindValue(':site',$site);
+        $comando ->bindValue(':inst',$instagram);
+
+        $comando ->bindValue(':cep',$cep);
+        $comando ->bindValue(':logradouro',$logradouro);
+        $comando ->bindValue(':numero',$numero);
+        $comando ->bindValue(':complemento',$complemento);
+        $comando ->bindValue(':cidade',$cidade);
+        $comando ->bindValue(':estado',$estado);
+        $comando ->bindValue(':latitude',$latitude);
+        $comando ->bindValue(':longitude',$longitude);
+        $comando ->bindValue(':tu',  $turismoRural);
+        $comando ->bindValue(':vf', $vendaFazenda);
+        $comando->bindValue(':vo', $vendaSite);
+        $comando ->bindValue(':telefone',$telefone);
+
+        $comando ->execute();
+
     }
 
 }

@@ -5,8 +5,9 @@
     $pv = new ClassPontoVenda("localhost", "leiteorganico", "postgres", "admin");
 
 ?>
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html lang="pt-br">
 <head>
     <style>
         #map {
@@ -14,14 +15,19 @@
             width: 900px;
         }
     </style>
+    <title>Formulario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/tabela.css">
-    <link rel="shortcut icon" type="imagem/x-icon"/>
-    <title>Leite Organico</title>
+    <script src="js/JQuery.js"></script><!--Versão 3.1.0-->
+    <script src="js/layout.js"></script>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="shortcut icon" type="imagem/x-icon" href="imagem/mar.png"/>
+
+
+
 </head>
 <body>
 <div class="seleMenu leite">
@@ -70,20 +76,39 @@
     </div>
 
 </div>
-<div class="filtro">
-    <tabela>
-        <tr>
-            <td>1</td>
-            <td>19965</td>
-        </tr>
-        <tr>
-            <td>1-898</td>
-        </tr>
-        <tr>
-            <td>2</td>
-        </tr>
-    </tabela>
+<?php
+    $mer=null;
+    $fei= null;
+    $onl= null;
+    $faz= null;
+    $ces=null;
+    if (isset($_POST["envia_Mapa"])) {
+        $mer= isset($_POST["venda"]) ? $_POST["venda"] : null;
+        $fei =isset($_POST["feira"]) ? $_POST["feira"] : null;
+        $onl=isset($_POST["online"]) ? $_POST["online"] : null;
+        $faz=isset($_POST["fazenda"]) ? $_POST["fazenda"] : null;
+        $ces=isset($_POST["cesta"]) ? $_POST["cesta"] : null;
+    }
+
+?>
+<div style=" background-color: #0713ff; float: left; margin-left: 2%; width: 10%; padding-bottom: 35%; padding-left: 1%; padding-top: 2%; color: #f6f4f4;">
+
+    <form method="post" action="" name="">
+
+
+        <br> <input type="checkbox" id="escolha1" name="feira" value="on"  <?php echo $fei == 'on'? 'checked' : ''; ?>>Feira
+        <br> <input type="checkbox" id="escolha2" name="fazenda"value="on"  <?php echo $faz == 'on'? 'checked' : ''; ?>>Venda na Fazenda
+        <br> <input type="checkbox" id="escolha3" name="online" value="on"  <?php echo $onl == 'on'? 'checked' : ''; ?>>venda Online
+        <br> <input type="checkbox" id="escolha4" name="cesta" value="on" <?php echo $ces == 'on'? 'checked' : ''; ?>>cesta
+        <br> <input type="checkbox"id="escolha5" name="venda" value="on"  <?php echo $mer == 'on'? 'checked' : ''; ?>>Mercado
+        <br><input type="submit"  name="envia_Mapa" value="criar mapa">
+    </form>
+
 </div>
+<div id="confirmacao" style="display:none">O checkbox está selecionado</div>
+<div id="confirmacao1" style="display:none">foi mercado</div>
+<div id="confirmacao2" style="display:none">foi cesta</div>
+<div id="confirmacao4" style="display:none">foi online</div>
 <?php
     $dados = $p->BuscarAprovacaoP();
     $dados1 = $pv->BuscarAprovacao();
@@ -211,6 +236,9 @@
             if ($k == "estado") {
                 $estado1 = $h;
             }
+            if ($k == "produtor") {
+                $produtor = $h;
+            }
             if ($k == "venda") {
                 $venda = $h;
             }
@@ -219,7 +247,7 @@
 
         $endr = "CEP: " . $cep1 . " - " . $logra1 . " N° " . $numero1 . "  " . $comp1 . " - " . $cidade1 . " - " . $estado1;
 
-        $comercio[$j] = array($venda, $nome1, $endr, $incio, $termino, $sema, $telefone1, $site1, $reg, $latitude1, $longitude1);
+        $comercio[$j] = array($venda, $nome1, $endr, $incio, $termino, $sema, $telefone1, $site1, $reg, $latitude1, $longitude1, $produtor);
     }
 ?>
 <div align="center">
@@ -231,18 +259,16 @@
     <hr width="900"/>
 </div>
 <script>
-    // Funcao que inicializa o mapa
-    // O parametro uluru marca o centro do mapa
-    // O parametro zoom indica o nivel de zoom do mapa
+
     function initMap() {
         var brasil = {lat: -21.010170, lng: -45.417042};
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 5,
+            zoom: 8,
             center: brasil
         });
         const Mercado = {
             path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#4be30c",
+            fillColor: "rgba(252,248,247,0.04)",
             fillOpacity: 0.8,
             strokeColor: "#2a4426",
             rotation: 0,
@@ -251,16 +277,16 @@
         };
         const VendaFazenda = {
             path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#ff7733",
+            fillColor: "rgba(252,248,247,0.04)",
             fillOpacity: 0.8,
-            strokeColor: "#993300",
+            strokeColor: "#ee78f3",
             rotation: 0,
             scale: 5,
 
         };
         const Cesta = {
             path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#8499e8",
+            fillColor: "rgba(252,248,247,0.04)",
             fillOpacity: 0.8,
             strokeColor: "#0638f8",
             rotation: 0,
@@ -269,7 +295,7 @@
         };
         const Feira = {
             path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#f5e592",
+            fillColor: "rgba(252,248,247,0.04)",
             fillOpacity: 0.8,
             strokeColor: "yellow",
             rotation: 0,
@@ -278,7 +304,7 @@
         };
         const VendaOnline = {
             path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#f193f0",
+            fillColor: "rgba(252,248,247,0.04)",
             fillOpacity: 0.8,
             strokeColor: "#ff0000",
             rotation: 0,
@@ -303,7 +329,10 @@
             $regiao1 = $comer[8];
             $lat1 = $comer[9];
             $long2 = $comer[10];
-            if($Tipo =="Mercado"){
+            $pdr = $comer[11];
+
+
+            if($mer == 'on' && $Tipo=='Mercado' ){
                 echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
                 echo "\n";
 
@@ -320,15 +349,14 @@
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
-        '<div id=\"bodyContent\">'+
+        '<div id=\"bodyContent\" style=\" text-align:justify\">'+
         '<p><b>Endereço: </b> " .  $localidade. "</p>' +
-        '<p><b>Contato: </b> " .  $tel1 . "</p>' +
+         '<p><b>Contato: </b> " .  $tel1 . "</p>' +
         '<p><b>site: </b> " . $sit . "</p>' +
-        '<p><b>Instagran: </b> " . $regiao1 . "</p>' +
-        '<p><b>Tipos de lácteos produzidos: </b> " . $hI . "</p>' +
-        '<p><b>Possui venda na propriedade?: </b> " . $hT . "</p>' +
-        '<p><b>Possui vendas Online?: </b> " .$sema . "</p>' +
-       
+        '<p><b>Produtor: </b>".$pdr. "  </p>' +
+    
+ 
+       '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
         '</div>'+
         '</div>';";
                 echo "\n";
@@ -348,8 +376,7 @@
 
             }
 
-
-            if($Tipo == "Feira"){
+            if($fei == 'on' && $Tipo=='Feira'){
                 echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
                 echo "\n";
 
@@ -366,15 +393,16 @@
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
-        '<div id=\"bodyContent\">'+
+        '<div id=\"bodyContent\" style=\" text-align:justify\">'+
         '<p><b>Endereço: </b> " .  $localidade. "</p>' +
-        '<p><b>Contato: </b> " .  $tel1 . "</p>' +
-        '<p><b>site: </b> " . $sit . "</p>' +
-        '<p><b>Instagran: </b> " . $regiao1 . "</p>' +
-        '<p><b>Tipos de lácteos produzidos: </b> " . $hI . "</p>' +
-        '<p><b>Possui venda na propriedade?: </b> " . $hT . "</p>' +
-        '<p><b>Possui vendas Online?: </b> " .$sema . "</p>' +
+       '<p><b>Produtos: </b> </p>' +
+        '<p><b>Produtor: </b>".$pdr. "  </p>' +
+      
+        '<p><b>Dias da semana que trabalha: </b> " .$sema . "</p>' +
+        '<p><b>Horario Inicio: </b> " . $hI . "<b> Horario de termino:</b> " . $hT . "</p>' +
+         '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
         
+       
         '</div>'+
         '</div>';";
                 echo "\n";
@@ -394,7 +422,9 @@
 
 
             }
-            if($Tipo == "Cesta"){
+
+
+            if($ces == 'on'  && $Tipo== 'Cesta'){
                 echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
                 echo "\n";
 
@@ -411,14 +441,13 @@
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
-        '<div id=\"bodyContent\">'+
+        '<div id=\"bodyContent\" style=\" text-align:justify\">'+
         '<p><b>Endereço: </b> " .  $localidade. "</p>' +
         '<p><b>Contato: </b> " .  $tel1 . "</p>' +
         '<p><b>site: </b> " . $sit . "</p>' +
-        '<p><b>Instagran: </b> " . $regiao1 . "</p>' +
-        '<p><b>Tipos de lácteos produzidos: </b> " . $hI . "</p>' +
-        '<p><b>Possui venda na propriedade?: </b> " . $hT . "</p>' +
-        '<p><b>Possui vendas Online?: </b> " .$sema . "</p>' +
+        '<p><b>Região de Atendimento: </b> " . $regiao1 . "</p>' +
+          '<p><b>Produtor: </b>".$pdr. "  </p>' +
+         '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
        
         '</div>'+
         '</div>';";
@@ -438,7 +467,11 @@
 
 
             }
-            if($Tipo == "Venda online"){
+
+
+
+
+            if($onl == 'on' && $Tipo== 'Venda online' ){
                 echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
                 echo "\n";
 
@@ -455,15 +488,13 @@
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
-        '<div id=\"bodyContent\">'+
+        '<div id=\"bodyContent\" style=\" text-align:justify\">'+
         '<p><b>Endereço: </b> " .  $localidade. "</p>' +
-        '<p><b>Contato: </b> " .  $tel1 . "</p>' +
+        
         '<p><b>site: </b> " . $sit . "</p>' +
-        '<p><b>Instagran: </b> " . $regiao1 . "</p>' +
-        '<p><b>Tipos de lácteos produzidos: </b> " . $hI . "</p>' +
-        '<p><b>Possui venda na propriedade?: </b> " . $hT . "</p>' +
-        '<p><b>Possui vendas Online?: </b> " .$sema . "</p>' +
-       
+        '<p><b>Produtos: </b> </p>' +
+        '<p><b>Produtor: </b>".$pdr. "  </p>' +
+        '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
         '</div>'+
         '</div>';";
                 echo "\n";
@@ -483,8 +514,8 @@
 
             }
 
-
         } // fim foreach
+
 
 
 
@@ -501,55 +532,54 @@
             $tur = $fazenda[7];
             $VF = $fazenda[8];
             $VO = $fazenda[9];
+            if($faz == 'on' ){
+                echo "var latLng = new google.maps.LatLng(" . $lat . "," . $long . ");";
+                echo "\n";
 
-
-            echo "var latLng = new google.maps.LatLng(" . $lat . "," . $long . ");";
-            echo "\n";
-
-            echo "var marker" . $j . " = new google.maps.Marker({
+                echo "var marker" . $j . " = new google.maps.Marker({
             position: latLng,
-             icon:VendaFazenda,
+             icon: VendaFazenda,
                 map: map,
                 title: '" . $nome_fazenda . "'
         });";
-            echo "\n";
+                echo "\n";
 
-            echo "var contentString" . $j . "  = '<div id=\"content\">'+
+                echo "var contentString" . $j . "  = '<div id=\"content\">'+
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_fazenda . "</h1>'+
-        '<div id=\"bodyContent\">'+
+        '<div id=\"bodyContent\" style=\" text-align:justify\">'+
         '<p><b>Endereço: </b> " . $end . "</p>' +
         '<p><b>Contato: </b> " . $tel . "</p>' +
-        '<p><b>site: </b> " . $si . "</p>' +
+        '<p><b>site: <a href=\". $si . \"> </b> " . $si . "</a> </p>' +
         '<p><b>Instagran: </b> " . $ins . "</p>' +
-      
+        
         '<p><b>Possui venda na propriedade?: </b> " . $VF . "</p>' +
         '<p><b>Possui vendas Online?: </b> " . $VO . "</p>' +
         '<p><b>Possui turismo rural? </b> " . $tur . "</p>' +
+        '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat ."%2C". $long ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
         '</div>'+
         '</div>';";
+                echo "\n";
 
-            echo "\n";
-
-            echo "var infowindow" . $j . " = new google.maps.InfoWindow({
+                echo "var infowindow" . $j . " = new google.maps.InfoWindow({
         content: contentString" . $j . "
     });";
 
-            echo "\n";
+                echo "\n";
 
-            echo "marker" . $j . ".addListener('click', function() {
+                echo "marker" . $j . ".addListener('click', function() {
     infowindow" . $j . ".open(map, marker" . $j . ");
     });";
 
-            // incrementa contador de iteracoes
-            $j++;
+                $j++;
+            }
         } // fim foreach
 
         ?>
 
 
-    }
+    } // fim initmap
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbNrEsfyvZCX_jhjZrCJAU0M04GeK9LcY&callback=initMap">

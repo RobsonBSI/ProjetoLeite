@@ -41,58 +41,58 @@
     foreach ($retorno as $key => $v) {
 
         if ($key == "id") {
-            $identrada = $v;
+            $identrada =trim( $v);
         }
         if ($key == "nome") {
-            $nome = $v;
+            $nome = trim($v);
         }
         if ($key == "site") {
-            $site = $v;
+            $site = trim($v);
         }
         if ($key == "instagran") {
-            $insta = $v;
+            $insta = trim($v);
         }
         if ($key == "cep") {
-            $cep = $v;
+            $cep = trim($v);
         }
         if ($key == "logradouro") {
-            $logra = $v;
+            $logra =trim( $v);
         }
         if ($key == "numero") {
-            $num = $v;
+            $num = trim($v);
         }
         if ($key == "complemento") {
-            $comple = $v;
+            $comple = trim($v);
         }
         if ($key == "cidade") {
-            $cida = $v;
+            $cida = trim($v);
         }
         if ($key == "estado") {
-            $es = $v;
+            $es = trim($v);
         }
         if ($key == "longitude") {
-            $long = $v;
+            $long =trim( $v);
         }
         if ($key == "latitude") {
-            $lat = $v;
+            $lat =trim( $v);
         }
         if ($key == "turismo") {
-            $turis = $v;
+            $turis = trim($v);
         }
         if ($key == "fazenda") {
-            $faz = $v;
+            $faz = trim($v);
         }
         if ($key == "online") {
-            $onl = $v;
+            $onl = trim($v);
         }
         if ($key == "telefone") {
-            $tel = $v;
+            $tel = trim($v);
         }
         if ($key == "data_aprovacao") {
-            $ok = $v;
+            $ok =trim( $v);
         }
         if ($key == "cadastro") {
-            $cas = $v;
+            $cas =trim( $v);
         }
 
     }

@@ -107,16 +107,16 @@
                             }
                             if ($key == "fazenda") {
                                 if("false"==$v){
-                                    echo "<b> Possui turismo na fazenda?: </b>Não  <br>";
+                                    echo "<b> Possui venda na fazenda?: </b>Não  <br>";
                                 }else{
-                                    echo "<b> Possui turismo na fazenda?: </b>Sim <br>";
+                                    echo "<b> Possui venda na fazenda?: </b>Sim <br>";
                                 }
                             }
                             if ($key == "online") {
                                 if("false"==$v){
-                                    echo "<b> Possui turismo na fazenda?: </b>Não  <br>";
+                                    echo "<b> Possui venda Online ?: </b>Não  <br>";
                                 }else{
-                                    echo "<b> Possui turismo na fazenda?: </b>Sim <br>";
+                                    echo "<b>  Possui venda Online ?: </b>Sim <br>";
                                 }
                             }
 

@@ -47,7 +47,7 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Fazendeiro
+                    Produtor
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="tabelaAprovado.php">Aprovado</a></li>

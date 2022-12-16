@@ -5,8 +5,9 @@
     $pv = new ClassPontoVenda("localhost", "leiteorganico", "postgres", "admin");
 
 ?>
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html lang="pt-br">
 <head>
     <style>
         #map {
@@ -14,14 +15,19 @@
             width: 900px;
         }
     </style>
+    <title>Formulario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/tabela.css">
-    <link rel="shortcut icon" type="imagem/x-icon"/>
-    <title>Leite Organico</title>
+    <script src="js/JQuery.js"></script><!--Versão 3.1.0-->
+    <script src="js/layout.js"></script>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="shortcut icon" type="imagem/x-icon" href="imagem/mar.png"/>
+
+
+
 </head>
 <body>
 <div class="seleMenu leite">
@@ -70,20 +76,22 @@
     </div>
 
 </div>
-<div class="filtro">
-    <tabela>
-        <tr>
-            <td>1</td>
-            <td>19965</td>
-        </tr>
-        <tr>
-            <td>1-898</td>
-        </tr>
-        <tr>
-            <td>2</td>
-        </tr>
-    </tabela>
+<div style=" background-color: #0713ff; float: left; margin-left: 2%; width: 10%; padding-bottom: 35%; padding-left: 1%; padding-top: 2%; color: #f6f4f4;">
+
+    <form method="post" action="" name="">
+
+
+    <br> <input type="checkbox" id="escolha1" name="escolha1">Feira
+    <br> <input type="checkbox" id="escolha2">Venda na Fazenda
+    <br> <input type="checkbox" id="escolha3">venda Online
+    <br> <input type="checkbox" id="escolha4">cesta
+    <br> <input type="checkbox"id="escolha5" name="venda">Mercado
+        <input type="submit">criar mapa
+    </form>
+
 </div>
+<div id="confirmacao" style="display:none">O checkbox está selecionado</div>
+<div id="confirmacao1" style="display:none">foi mercado</div>
 <?php
     $dados = $p->BuscarAprovacaoP();
     $dados1 = $pv->BuscarAprovacao();
@@ -237,54 +245,9 @@
     function initMap() {
         var brasil = {lat: -21.010170, lng: -45.417042};
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 5,
+            zoom: 8,
             center: brasil
         });
-        const Mercado = {
-            path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#4be30c",
-            fillOpacity: 0.8,
-            strokeColor: "#2a4426",
-            rotation: 0,
-            scale: 5,
-
-        };
-        const VendaFazenda = {
-            path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#ff7733",
-            fillOpacity: 0.8,
-            strokeColor: "#993300",
-            rotation: 0,
-            scale: 5,
-
-        };
-        const Cesta = {
-            path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#8499e8",
-            fillOpacity: 0.8,
-            strokeColor: "#0638f8",
-            rotation: 0,
-            scale: 5,
-
-        };
-        const Feira = {
-            path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#f5e592",
-            fillOpacity: 0.8,
-            strokeColor: "yellow",
-            rotation: 0,
-            scale: 5,
-
-        };
-        const VendaOnline = {
-            path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            fillColor: "#f193f0",
-            fillOpacity: 0.8,
-            strokeColor: "#ff0000",
-            rotation: 0,
-            scale: 5,
-
-        };
 
         <?php
 
@@ -292,31 +255,99 @@
         $j = 0;
         foreach ($comercio as $comer) {
 
-            $Tipo = $comer[0];
-            $nome_Comercio = $comer[1];
-            $localidade = $comer[2];
-            $hI = $comer[3];
-            $hT = $comer[4];
-            $sema = $comer[5];
-            $tel1 = $comer[6];
-            $sit = $comer[7];
-            $regiao1 = $comer[8];
-            $lat1 = $comer[9];
-            $long2 = $comer[10];
-            if($Tipo =="Mercado"){
-                echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
-                echo "\n";
+        $Tipo = $comer[0];
+        $nome_Comercio = $comer[1];
+        $localidade = $comer[2];
+        $hI = $comer[3];
+        $hT = $comer[4];
+        $sema = $comer[5];
+        $tel1 = $comer[6];
+        $sit = $comer[7];
+        $regiao1 = $comer[8];
+        $lat1 = $comer[9];
+        $long2 = $comer[10];
+        ?>
+        $('#escolha5').click(function() {
+            var vendaFazenda = document.querySelectorAll("input[name=venda]:checked");
 
 
-                echo "var marker" . $j . " = new google.maps.Marker({
+            if (vendaFazenda.length < 1) {
+                $("#confirmacao1").hide();
+
+                for (i = 0;i < markers.length;i++) {
+                    markers[i].setMap(null);
+                }
+
+            }else {
+                $("#confirmacao1").show();
+
+                <?php
+                if($Tipo =="Mercado"){
+                    echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
+                    echo "\n";
+
+
+                    echo "var marker" . $j . " = new google.maps.Marker({
             position: latLng,
-            icon: Mercado,
+            icon: 'imagem/marcadores/mercado.png',
                 map: map,
                 title: '" .$nome_Comercio . "'
         });";
-                echo "\n";
+                    echo "\n";
 
-                echo "var contentString" . $j . "  = '<div id=\"content\">'+
+                    echo "var contentString" . $j . "  = '<div id=\"content\">'+
+        '<div id=\"siteNotice\">'+
+        '</div>'+
+        '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
+        '<div id=\"bodyContent\">'+
+        '<p><b>Endereço: </b> " .  $localidade. "</p>' +
+        '<p><b>Contato: </b> " .  $tel1 . "</p>' +
+        '<p><b>site: </b> " . $sit . "</p>' +
+      
+
+        '<p><b>Instagran: </b> " . $regiao1 . "</p>' +
+        '<p><b>Tipos de lácteos produzidos: </b> " . $hI . "</p>' +
+        '<p><b>Possui venda na propriedade?: </b> " . $hT . "</p>' +
+        '<p><b>Possui vendas Online?: </b> " .$sema . "</p>' +
+       
+        '</div>'+
+        '</div>';";
+                    echo "\n";
+
+                    echo "var infowindow" . $j . " = new google.maps.InfoWindow({
+        content: contentString" . $j . "
+    });";
+
+                    echo "\n";
+
+                    echo "marker" . $j . ".addListener('click', function() {
+    infowindow" . $j . ".open(map, marker" . $j . ");
+    });";
+                    // incrementa contador de iteracoes
+                    $j++;
+
+
+                }
+                ?>
+            }
+
+        });
+
+        <?php
+        if($Tipo == "Feira"){
+            echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
+            echo "\n";
+
+
+            echo "var marker" . $j . " = new google.maps.Marker({
+            position: latLng,
+            icon: 'imagem/marcadores/feira.png',
+                map: map,
+                title: '" .$nome_Comercio . "'
+        });";
+            echo "\n";
+
+            echo "var contentString" . $j . "  = '<div id=\"content\">'+
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
@@ -331,83 +362,37 @@
        
         '</div>'+
         '</div>';";
-                echo "\n";
+            echo "\n";
 
-                echo "var infowindow" . $j . " = new google.maps.InfoWindow({
+            echo "var infowindow" . $j . " = new google.maps.InfoWindow({
         content: contentString" . $j . "
     });";
 
-                echo "\n";
+            echo "\n";
 
-                echo "marker" . $j . ".addListener('click', function() {
+            echo "marker" . $j . ".addListener('click', function() {
     infowindow" . $j . ".open(map, marker" . $j . ");
     });";
-                // incrementa contador de iteracoes
-                $j++;
+            // incrementa contador de iteracoes
+            $j++;
 
 
-            }
+
+        }
+        if($Tipo == "Cesta"){
+            echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
+            echo "\n";
 
 
-            if($Tipo == "Feira"){
-                echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
-                echo "\n";
-
-
-                echo "var marker" . $j . " = new google.maps.Marker({
+            echo "var marker" . $j . " = new google.maps.Marker({
             position: latLng,
-            icon: Feira,
+            icon: 'imagem/marcadores/cesta.png',
                 map: map,
                 title: '" .$nome_Comercio . "'
         });";
-                echo "\n";
+            echo "\n";
 
-                echo "var contentString" . $j . "  = '<div id=\"content\">'+
-        '<div id=\"siteNotice\">'+
-        '</div>'+
-        '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
-        '<div id=\"bodyContent\">'+
-        '<p><b>Endereço: </b> " .  $localidade. "</p>' +
-        '<p><b>Contato: </b> " .  $tel1 . "</p>' +
-        '<p><b>site: </b> " . $sit . "</p>' +
-        '<p><b>Instagran: </b> " . $regiao1 . "</p>' +
-        '<p><b>Tipos de lácteos produzidos: </b> " . $hI . "</p>' +
-        '<p><b>Possui venda na propriedade?: </b> " . $hT . "</p>' +
-        '<p><b>Possui vendas Online?: </b> " .$sema . "</p>' +
-        
-        '</div>'+
-        '</div>';";
-                echo "\n";
-
-                echo "var infowindow" . $j . " = new google.maps.InfoWindow({
-        content: contentString" . $j . "
-    });";
-
-                echo "\n";
-
-                echo "marker" . $j . ".addListener('click', function() {
-    infowindow" . $j . ".open(map, marker" . $j . ");
-    });";
-                // incrementa contador de iteracoes
-                $j++;
-
-
-
-            }
-            if($Tipo == "Cesta"){
-                echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
-                echo "\n";
-
-
-                echo "var marker" . $j . " = new google.maps.Marker({
-            position: latLng,
-            icon: Cesta,
-                map: map,
-                title: '" .$nome_Comercio . "'
-        });";
-                echo "\n";
-
-                echo "var contentString" . $j . "  = '<div id=\"content\">'+
+            echo "var contentString" . $j . "  = '<div id=\"content\">'+
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
@@ -422,36 +407,36 @@
        
         '</div>'+
         '</div>';";
-                echo "\n";
+            echo "\n";
 
-                echo "var infowindow" . $j . " = new google.maps.InfoWindow({
+            echo "var infowindow" . $j . " = new google.maps.InfoWindow({
         content: contentString" . $j . "
     });";
 
-                echo "\n";
+            echo "\n";
 
-                echo "marker" . $j . ".addListener('click', function() {
+            echo "marker" . $j . ".addListener('click', function() {
     infowindow" . $j . ".open(map, marker" . $j . ");
     });";
-                // incrementa contador de iteracoes
-                $j++;
+            // incrementa contador de iteracoes
+            $j++;
 
 
-            }
-            if($Tipo == "Venda online"){
-                echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
-                echo "\n";
+        }
+        if($Tipo == "Venda online"){
+            echo "var latLng = new google.maps.LatLng(" . $lat1 . "," . $long2 . ");";
+            echo "\n";
 
 
-                echo "var marker" . $j . " = new google.maps.Marker({
+            echo "var marker" . $j . " = new google.maps.Marker({
             position: latLng,
-            icon: VendaOnline,
+            icon: 'imagem/marcadores/online.png',
                 map: map,
                 title: '" .$nome_Comercio . "'
         });";
-                echo "\n";
+            echo "\n";
 
-                echo "var contentString" . $j . "  = '<div id=\"content\">'+
+            echo "var contentString" . $j . "  = '<div id=\"content\">'+
         '<div id=\"siteNotice\">'+
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
@@ -466,22 +451,22 @@
        
         '</div>'+
         '</div>';";
-                echo "\n";
+            echo "\n";
 
-                echo "var infowindow" . $j . " = new google.maps.InfoWindow({
+            echo "var infowindow" . $j . " = new google.maps.InfoWindow({
         content: contentString" . $j . "
     });";
 
-                echo "\n";
+            echo "\n";
 
-                echo "marker" . $j . ".addListener('click', function() {
+            echo "marker" . $j . ".addListener('click', function() {
     infowindow" . $j . ".open(map, marker" . $j . ");
     });";
-                // incrementa contador de iteracoes
-                $j++;
+            // incrementa contador de iteracoes
+            $j++;
 
 
-            }
+        }
 
 
         } // fim foreach
@@ -502,13 +487,12 @@
             $VF = $fazenda[8];
             $VO = $fazenda[9];
 
-
             echo "var latLng = new google.maps.LatLng(" . $lat . "," . $long . ");";
             echo "\n";
 
             echo "var marker" . $j . " = new google.maps.Marker({
             position: latLng,
-             icon:VendaFazenda,
+             icon: 'imagem/marcadores/leiteFazenda.png',
                 map: map,
                 title: '" . $nome_fazenda . "'
         });";
@@ -523,13 +507,12 @@
         '<p><b>Contato: </b> " . $tel . "</p>' +
         '<p><b>site: </b> " . $si . "</p>' +
         '<p><b>Instagran: </b> " . $ins . "</p>' +
-      
+       
         '<p><b>Possui venda na propriedade?: </b> " . $VF . "</p>' +
         '<p><b>Possui vendas Online?: </b> " . $VO . "</p>' +
         '<p><b>Possui turismo rural? </b> " . $tur . "</p>' +
         '</div>'+
         '</div>';";
-
             echo "\n";
 
             echo "var infowindow" . $j . " = new google.maps.InfoWindow({
@@ -549,10 +532,32 @@
         ?>
 
 
-    }
+    } // fim initmap
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbNrEsfyvZCX_jhjZrCJAU0M04GeK9LcY&callback=initMap">
 </script>
 </body>
 </html>
+<script>
+    $('#estaSelecionado').click(function() {
+        var vendaFazenda = document.querySelectorAll("input[name=vendaFazenda]:checked");
+
+        if (vendaFazenda.length < 1) {
+            $("#confirmacao").hide();
+        }else {
+            $("#confirmacao").show();
+        }
+
+    });
+    $('#escolha5').click(function() {
+        var vendaFazenda = document.querySelectorAll("input[name=venda]:checked");
+
+        if (vendaFazenda.length < 1) {
+            $("#confirmacao1").hide();
+        }else {
+            $("#confirmacao1").show();
+        }
+
+    });
+</script>+

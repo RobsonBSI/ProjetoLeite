@@ -47,7 +47,7 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Fazendeiro
+                    Produtor
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="tabelaAprovado.php">Aprovado</a></li>
@@ -127,10 +127,10 @@
                     <td>
                         <a type="button" class="btn btn-outline-secondary"
                            href="informaComercio.php?id= <?php echo $dados[$i]['id']; ?>">Ver informações</a>
-                        <!-- <a type="button" class="btn btn-outline-danger"
-                           href="tabelaComercio.php?id=  <?php /* echo $dados[$i]['id']; ?>">Rejeitar</a>
+                        <a type="button" class="btn btn-outline-danger"
+                           href="tabelaComercio.php?id=  <?php  echo $dados[$i]['id']; ?>">Rejeitar</a>
                         <a type="button" class="btn btn-outline-success"
-                           href="tabelaComercio.php?id_aprovado= <?php echo $dados[$i]['id']; */?>">Aprovado</a>-->
+                           href="tabelaComercio.php?id_aprovado= <?php echo $dados[$i]['id'];?>">Aprovado</a>
                     </td>
                     <?php
                     echo " </tr>";
