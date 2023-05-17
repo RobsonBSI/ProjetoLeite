@@ -14,6 +14,7 @@
         var_dump($_POST);
         $id = $_POST["id_produtor"];
         $produtor = trim(isset($_POST["produtor"]) ? $_POST["produtor"] : null);
+        $email = trim(isset($_POST["emailComercio"]) ? $_POST["emailComercio"] : null);
         $site =trim(isset($_POST["websiter"]) ? $_POST["websiter"] : null);
         $instagram = trim(isset($_POST["instagramProdutor"]) ? $_POST["instagramProdutor"] : null);
         $cep =trim(isset($_POST["cep"]) ? $_POST["cep"] : null);
@@ -31,7 +32,7 @@
         $produtosFornecidos = isset($_POST["produtoF"]) ? $_POST["produtoF"] : null;
 
 
-        $id_produto = $p->atualizarProdutor($id,$produtor,$site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone);
+        $id_produto = $p->atualizarProdutor($id,$produtor,$site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone,$email);
 
         $pp->DeletarPP($id);
         if (!empty($produtosFornecidos)) {
@@ -45,6 +46,7 @@
         var_dump($_POST);
         $id = trim($_POST["id_PontoVenda"]);
         $nome =trim(isset($_POST["nome"]) ? $_POST["nome"] : null);
+        $email = trim(isset($_POST["email"]) ? $_POST["email"] : null);
         $semana = trim(isset($_POST["semana"]) ? $_POST["semana"] : null);
         $inicio = trim(isset($_POST["horarioInicio"]) ? $_POST["horarioInicio"] : null);
         $termino =trim(isset($_POST["horarioTermino"]) ? $_POST["horarioTermino"] : null);
@@ -62,7 +64,7 @@
         $produtosFornecidos = isset($_POST["produtoF"]) ? $_POST["produtoF"] : null;
         $proCadastrado =trim( isset($_POST["produtor"]) ? $_POST["produtor"] : null);
 
-       $pv->atualizarVenda($id,$nome, $inicio, $termino, $regiao, $telefone, $site, $cep, $logradouro, $numero, $complemento, $latitude, $longitude,$cidade, $estado,$semana,$proCadastrado);
+       $pv->atualizarVenda($id,$nome, $inicio, $termino, $regiao, $telefone, $site, $cep, $logradouro, $numero, $complemento, $latitude, $longitude,$cidade, $estado,$semana,$proCadastrado,$email);
 
         $ppv->DeletarPPV($id);
         if (!empty($produtosFornecidos)) {

@@ -22,13 +22,10 @@
     <title>Formulario</title>
     <script src="js/JQuery.js"></script><!--Versão 3.1.0-->
     <script src="js/layout.js"></script>
+    <link rel="stylesheet" href="css/menu.css">
     <link rel="shortcut icon" type="imagem/x-icon" href="imagem/LeiteBase.png"/>
     <script src="js/ValidacaoFazenda.js"></script>
     <script src="js/Validacao.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link href="css/estilo.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/menu.css">
 
 
 </head>
@@ -36,7 +33,7 @@
 <body>
 <nav class="leite">
 
-
+    <img  src="imagem/logo3.png" width="20%" height= "100%" style="float:left; margin-left:10%;" >
 
 
     <div class="seleMenu" style="float:right;margin-right:40% ;">
@@ -52,32 +49,7 @@
     </div>
 
 </nav>
-<nav>
-    <ul>
-        <li class="logo"><img alt="" src="imagem/logo.png" style="width:20%; height:20%"></li>
-        <li>
-            <a href="tabelaTipo.php"> Tabela Produtos</a>
-        </li>
-        <li>
-            <a href="tabela.php"> Tabela Fazenda</a>
-        </li>
-        <li>
-            <a href="tabelaComercio.php"> Tabela Comercio</a>
-        </li>
 
-        <li>
-            <a href="MapaFazenda.php">  Mapa</a>
-        </li>
-
-        <li>
-            <a href="#"><i class="fa fa-remove"></i>   sair</a>
-        </li>
-
-    </ul>
-</nav>
-<div class="wrapper">
-    <div class="section">
-        <div class="box-area">
 <?php
     $produto = "";
     date_default_timezone_set('America/Fortaleza');
@@ -89,7 +61,6 @@
         $inf = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         $produtor = $_POST["produtor"];
-        $email = isset($_POST["email"]) ? $_POST["email"] : null;
         $site = $_POST["websiter"];
         $instagram = $_POST["instagramProdutor"];
         $cep = $_POST["cep"];
@@ -109,14 +80,14 @@
         date_default_timezone_set('America/Fortaleza');
         $dCadastro = date('d/m/Y H:i:s');
 
-        $id_produto = $p->CadastrarProdutor($produtor, $site, $instagram, $cep, $logradouro, $numero, $complemento, $cidade, $estado, $longitude, $latitude, $turismoRural, $vendaFazenda, $vendaSite, $telefone, $dCadastro,$email);
+        $id_produto = $p->CadastrarProdutor($produtor, $site, $instagram, $cep, $logradouro, $numero, $complemento, $cidade, $estado, $longitude, $latitude, $turismoRural, $vendaFazenda, $vendaSite, $telefone, $dCadastro);
 
         if (!empty($produtosFornecidos)) {
             foreach ($produtosFornecidos as $key => $v) {
                 $pp->CadastrarPP($v, $id_produto);
             }
         }
-        header("location:formulario.php");
+        header("location:obrigado.html");
 
 
     }
@@ -129,7 +100,6 @@
 
         $tipo = $_POST["tipo1"];
         $nome = $_POST["nome"];
-        $email = isset($_POST["emailComercio"]) ? $_POST["emailComercio"] : null;
         $semana = isset($_POST["diaAtentimento"]) ? $_POST["diaAtentimento"] : null;
         $inicio = $_POST["horarioInicio"];
         $termino = $_POST["horarioTermino"];
@@ -178,7 +148,7 @@
 
         date_default_timezone_set('America/Fortaleza');
         $dCadastro = date('d/m/Y H:i:s');
-        $id_PontoVenda = $pv->CadastrarPontoVenda($nome, $inicio, $termino, $regiao, $telefone, $site, $cep, $logradouro, $numero, $complemento, $latitude, $longitude, $cidade, $estado, $tipo, $dCadastro, $sema, $proCadastrado,$email);
+        $id_PontoVenda = $pv->CadastrarPontoVenda($nome, $inicio, $termino, $regiao, $telefone, $site, $cep, $logradouro, $numero, $complemento, $latitude, $longitude, $cidade, $estado, $tipo, $dCadastro, $sema, $proCadastrado);
 
         if (!empty($produtosFornecidos)) {
             foreach ($produtosFornecidos as $key => $v) {
@@ -192,7 +162,7 @@
                                   }
                               }
          */
-        header("location:formulario.php");
+        header("location:obrigado.html");
 
 
     }
@@ -204,7 +174,7 @@
     <form method="post" action="" name="forComercio">
         <fieldset style="padding-left:2%;padding-bottom:1%;  ">
             <legend class="legendas">Dados Cadastrais</legend>
-            <div class="labelInput required">Tipo de Comercio:</div>
+            <h2 class="labelInput required">Tipo de Comercio:</h2>
 
             <select id="tipo1" name="tipo1" class="inputUser required">
                 <?php
@@ -231,10 +201,7 @@
                 <label for="nome" class="labelInput required">Nome: </label>
                 <input type="text" id="nome" name="nome" class="inputUser " >
             </div>
-            <div class="tex12">
-                <label for="emailComercio" class="labelInput "> Email:</label>
-                <input type="email" name="emailComercio" class="inputUser" >
-            </div>
+
             <div class="feira" hidden>
 
                 <label class="labelInput required"> dias da semana:</label>
@@ -417,7 +384,6 @@
                                                 $u++;
                                             }
                                             if ($rePro[$r] != $id_pro && $u == count($rePro)) {
-                                                if ($v != "Leite (Venda para laticinio)") {
                                                 ?>
                                                 <td>
 
@@ -429,10 +395,9 @@
                                                 <?php
 
                                             }
-                                            }
                                         }
                                     } else {
-                                        if ($v != "Leite (Venda para laticinio)") {
+
                                         ?>
                                         <td>
 
@@ -443,7 +408,7 @@
                                         </td>
                                         <?php
                                     }
-                                    }
+
                                 }
 
 
@@ -482,10 +447,6 @@
             <div class="tex12">
                 <label for="produtor" class="labelInput required"> Nome:</label>
                 <input type="text" name="produtor" class="inputUser" >
-            </div>
-            <div class="tex12">
-                <label for="email" class="labelInput required"> Email:</label>
-                <input type="email" name="email" class="inputUser" >
             </div>
             <div class="tex12">
                 <label for="websiter" class="labelInput"> Website:</label>
@@ -649,9 +610,6 @@
         </div>
     </form>
 </div>
-        </div>
-    </div>
-</div>
 <script src="js/custom.js"></script>
 <script>
     var cont = 1;
@@ -670,3 +628,4 @@
 
 </body>
 </html>
+

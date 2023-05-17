@@ -15,9 +15,8 @@
     <title>Formulario</title>
     <script src="js/JQuery.js"></script><!--Versão 3.1.0-->
     <script src="js/layout.js"></script>
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="shortcut icon" type="imagem/x-icon" href="imagem/mar.png"/>
-    <link rel="stylesheet" href="css/estilo2.css">
+    <link rel="shortcut icon" type="imagem/x-icon" href="imagem/LeiteBase.png"/>
+    <link rel="stylesheet" href="css/menuInformacao.css">
 
 
 </head>
@@ -102,12 +101,13 @@
 <nav class="leite">
 
     <div class="seleMenu">
-        Editar Produtor
+        <img  src="imagem/logo3.png" width="20%" height= "80%"  style="float:left; padding-left: 15%" >
+        <p style=" margin-left:40%; margin-top:3%;font-size:40px ;" >Editar Produtor</p>
     </div>
 </nav>
 
 <!-- formulario do Fazendeiro -->
-<div class="p1">
+<div class="p2">
 
     <form method="post" action="alteracao.php" name="envio_Formulario1">
         <fieldset>

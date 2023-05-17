@@ -17,9 +17,9 @@
     <title>Formulario</title>
     <script src="js/JQuery.js"></script><!--Versão 3.1.0-->
     <script src="js/selecaoComercio.js"></script>
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="shortcut icon" type="imagem/x-icon" href="imagem/mar.png"/>
-    <link rel="stylesheet" href="css/estilo2.css">
+
+    <link rel="shortcut icon" type="imagem/x-icon" href="imagem/LeiteBase.png"/>
+    <link rel="stylesheet" href="css/menuInformacao.css">
 
 
 
@@ -71,7 +71,6 @@
             $ter = trim($v);
         }
 
-
         if ($key == "cep") {
             $cep = trim($v);
         }
@@ -109,9 +108,13 @@
         if ($key == "produtor") {
             $prod=trim( $v);
         }
+        if ($key == "email") {
+            $email = trim($v);
+        }
         if ($key == "tipo_id") {
             $tipo_ID =trim( $v);
         }
+
 
 
     }
@@ -121,7 +124,8 @@
 <nav class="leite">
 
     <div class="seleMenu">
-        Editar Comercio
+        <img  src="imagem/logo3.png" width="20%" height= "80%"  style="float:left; padding-left: 15%" >
+        <p style=" margin-left:40%; margin-top:3%;font-size:40px ;" >Editar Produtor</p>
     </div>
 </nav>
 <!-- formulario para o comercio -->
@@ -142,6 +146,10 @@
             <div class="tex12 ">
                 <label for="nome" class="labelInput">Nome: </label>
                 <input type="text" name="nome" class="inputUser " value=" <?php echo $nome; ?>">
+            </div>
+            <div class="tex12">
+                <label for="emailComercio" class="labelInput "> Email:</label>
+                <input type="email" name="emailComercio" class="inputUser" alue=" <?php echo $email; ?>" >
             </div>
             <?php
                 if ($venda == "Cesta") {

@@ -34,9 +34,9 @@
         }
 
 
-        public function CadastrarPontoVenda($nome,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$tipo,$cadastro,$semana,$produtor)
+        public function CadastrarPontoVenda($nome,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$tipo,$cadastro,$semana,$produtor,$email)
         {
-            $comando=$this->conexao->prepare( " INSERT INTO pontovenda(nome,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,tipo_id,cadastro,semana,produtor)   VALUES(:nome,:hInicio,:hTermino,:regiao,:telefone,:site,:cep,:logradouro,:numero,:complemento,:latitude,:longitude,:cidade,:estado,:tipo,:ca,:se,:prod)" );
+            $comando=$this->conexao->prepare( " INSERT INTO pontovenda(nome,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,tipo_id,cadastro,semana,produtor,email)   VALUES(:nome,:hInicio,:hTermino,:regiao,:telefone,:site,:cep,:logradouro,:numero,:complemento,:latitude,:longitude,:cidade,:estado,:tipo,:ca,:se,:prod,:email)" );
             $comando ->bindValue(':nome',$nome);
             $comando ->bindValue(':hInicio',$inicio);
             $comando ->bindValue(':hTermino',$termino);
@@ -55,7 +55,7 @@
             $comando ->bindValue(':ca',$cadastro);
             $comando ->bindValue(':se',$semana);
             $comando ->bindValue(':prod',$produtor);
-
+            $comando ->bindValue(':email',$email);
             $comando ->execute();
             $resposta = $this->conexao->lastInsertId();
             return  $resposta;
@@ -77,14 +77,14 @@
         }
         public function BuscarAprovacao(){
             $resposta=array();
-            $comando=$this->conexao->query("SELECT p.id,nome,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,data_aprovacao,semana,produtor,t.venda FROM pontovenda p INNER JOIN tipo t ON t.id =p.tipo_id where data_aprovacao is not null");
+            $comando=$this->conexao->query("SELECT p.id,nome,inicio,termino,regiao,telefone,site,cep,logradouro,numero,complemento,latitude,longitude,cidade,estado,data_aprovacao,semana,produtor,email,t.venda FROM pontovenda p INNER JOIN tipo t ON t.id =p.tipo_id where data_aprovacao is not null");
             $resposta= $comando->fetchAll(PDO::FETCH_ASSOC);
             return  $resposta;
         }
 
-        public function atualizarVenda($id,$nome,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$semana,$produtor){
+        public function atualizarVenda($id,$nome,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$semana,$produtor,$email){
             try {
-            $comando= $this->conexao->prepare("UPDATE pontovenda SET nome=:nome,inicio=:hInicio,termino=:hTermino,regiao=:regiao,telefone=:telefone,site=:site,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,latitude=:latitude,longitude=:longitude,cidade=:cidade,estado=:estado,semana=:se,produtor=:prod WHERE id =:id");
+            $comando= $this->conexao->prepare("UPDATE pontovenda SET nome=:nome,inicio=:hInicio,termino=:hTermino,regiao=:regiao,telefone=:telefone,site=:site,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,latitude=:latitude,longitude=:longitude,cidade=:cidade,estado=:estado,semana=:se,produtor=:prod,email=:email WHERE id =:id");
             $comando ->bindValue(':id',$id);
             $comando ->bindValue(':nome',$nome);
             $comando ->bindValue(':hInicio',$inicio);
@@ -102,6 +102,7 @@
             $comando ->bindValue(':estado',$estado);
             $comando ->bindValue(':se',$semana);
             $comando ->bindValue(':prod',$produtor);
+            $comando ->bindValue(':email',$email);
             $comando ->execute();
         } catch(PDOException $e) {
                 echo 'Error: ' . $e->getMessage();

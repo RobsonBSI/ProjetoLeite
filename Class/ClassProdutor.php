@@ -28,9 +28,9 @@ class ClassProdutor
         $comando->execute();
 
      }
-    public function CadastrarProdutor( $produtor, $site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone,$dataCadastro){
+    public function CadastrarProdutor( $produtor, $site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone,$dataCadastro,$email){
 
-        $comando =$this->conexao->prepare('INSERT INTO produtor(nome,site,instagran,cep,logradouro,numero,complemento,cidade,estado,longitude,latitude,turismo,fazenda,online,telefone,cadastro) VALUES(:n,:s,:i,:cep,:lo,:nu,:co,:ci,:es,:logi,:lat,:tu,:vf,:vo,:tel,:dataC)');
+        $comando =$this->conexao->prepare('INSERT INTO produtor(nome,site,instagran,cep,logradouro,numero,complemento,cidade,estado,longitude,latitude,turismo,fazenda,online,telefone,cadastro,email) VALUES(:n,:s,:i,:cep,:lo,:nu,:co,:ci,:es,:logi,:lat,:tu,:vf,:vo,:tel,:dataC,:em)');
         $comando ->bindValue(':n', $produtor);
         $comando->bindValue(':s',  $site);
         $comando->bindValue(':i', $instagram);
@@ -47,6 +47,7 @@ class ClassProdutor
         $comando->bindValue(':vo', $vendaSite);
         $comando->bindValue(':tel',$telefone);
         $comando->bindValue(':dataC',$dataCadastro);
+        $comando->bindValue(':em',$email);
         $comando ->execute();
         $resposta = $this->conexao->lastInsertId();
         echo $resposta;
@@ -74,14 +75,13 @@ class ClassProdutor
         return $resposta;
     }
 
-    public function atualizarProdutor($id,$produtor,$site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone){
+    public function atualizarProdutor($id,$produtor,$site,$instagram,$cep,$logradouro,$numero,$complemento,$cidade,$estado,$longitude,$latitude,$turismoRural,$vendaFazenda,$vendaSite,$telefone,$email){
 
-        $comando= $this->conexao->prepare("UPDATE produtor SET nome=:nome,site=:site,instagran=:inst,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,cidade=:cidade,estado=:estado,latitude=:latitude,longitude=:longitude,turismo=:tu,fazenda=:vf,online=:vo,telefone=:telefone WHERE id =:id");
+        $comando= $this->conexao->prepare("UPDATE produtor SET nome=:nome,site=:site,instagran=:inst,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,cidade=:cidade,estado=:estado,latitude=:latitude,longitude=:longitude,turismo=:tu,fazenda=:vf,online=:vo,telefone=:telefone,email=:email WHERE id =:id");
         $comando ->bindValue(':id',$id);
         $comando ->bindValue(':nome',$produtor);
         $comando ->bindValue(':site',$site);
         $comando ->bindValue(':inst',$instagram);
-
         $comando ->bindValue(':cep',$cep);
         $comando ->bindValue(':logradouro',$logradouro);
         $comando ->bindValue(':numero',$numero);
@@ -94,7 +94,7 @@ class ClassProdutor
         $comando ->bindValue(':vf', $vendaFazenda);
         $comando->bindValue(':vo', $vendaSite);
         $comando ->bindValue(':telefone',$telefone);
-
+        $comando->bindValue(':email',$email);
         $comando ->execute();
 
     }

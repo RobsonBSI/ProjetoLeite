@@ -12,9 +12,9 @@
 <head>
 
     <title>Formulario</title>
+    <link rel="shortcut icon" type="imagem/x-icon" href="imagem/LeiteBase.png"/>
 
-    <link rel="shortcut icon" type="imagem/x-icon"/>
-    <link rel="stylesheet" href="css/estilo2.css">
+    <link rel="stylesheet" href="css/menuInformacao.css">
 
 
 </head>
@@ -27,8 +27,8 @@
 ?>
 <nav class="leite">
 
-    <div class="seleMenu">
-
+    <div class="seleMenu" style=" text-align: center;">
+        <img  src="imagem/logo3.png" width="20%" height= "80%"  " >
     </div>
 </nav>
 

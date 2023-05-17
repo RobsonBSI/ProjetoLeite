@@ -1,7 +1,23 @@
 function validarProdutor() {
     var nome =forProdutor.produtor.value;
-    var site =forProdutor.websiter.value;
-    var tel =forProdutor.telefone.value;
+
+
+    var termo = document.querySelectorAll(".ac1");
+    var cont9=0;
+    termo.forEach(function(el){
+        if(el.checked){
+            cont9++
+        }
+    });
+
+
+    var declaracao = document.querySelectorAll(".ac2");
+    var cont8=0;
+    declaracao.forEach(function(el){
+        if(el.checked){
+            cont8++
+        }
+    });
     var listaProduro = document.querySelectorAll(".tes1");
     var cont=0;
     listaProduro.forEach(function(el){
@@ -26,16 +42,7 @@ function validarProdutor() {
         forProdutor.produtor.focus();
         return false;
     }
-    if (site == "") {
-        alert("Campo Site vazio");
-        forProdutor.websiter.focus();
-        return false;
-    }
-    if (tel == "") {
-        alert("Campo telefone vazio");
-        forProdutor.telefone.focus();
-        return false;
-    }
+
     if (cont<=0){
         alert("Selecione uma das opção da lista de produtor");
 
@@ -82,6 +89,17 @@ function validarProdutor() {
     }
     if (vendaSite.length < 1) {
         alert("Selecione uma das opção de venda pelo site");
+        return false;
+    }
+
+    if (cont9<=0){
+        alert(" Não aceito o termo de uso");
+
+        return false;
+    }
+    if (cont8<=0){
+        alert(" Não aceito a declaração de privacidade");
+
         return false;
     }
 }

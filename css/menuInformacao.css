@@ -1,24 +1,31 @@
-body,html {
-
+body {
     margin: 0;
-    background: rgba(240, 253, 238, 0.11);
-    float: none;
-
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e3e9f7;
+    max-width: 100%;
 }
-.leite {
-    position: relative;
-    height: 40vh;
-    width: 100vw;
-    background: url('../imagem/leite.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position:center;
-}
-
 .legendas{
     text-align: center;
     font-family:Arial, Helvetica, sans-serif;
     font-size: 16pt;
+}
+.leite {
+    position: relative;
+    height: 20vh;
+    width: 100vw;
+    background-color:#003e81;
+
+    background-attachment: fixed;
+
+}
+.seleMenu{
+
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    padding-top:1%;
+
+    color: #f6f4f4;
 }
 .orga{
     padding-left:10%;
@@ -89,4 +96,41 @@ body,html {
 .button4:hover{
     background-color:#a0ebee;
     color: #070707;
+}
+.labelInput{
+    display: block;
+    line-height:30px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+}
+.labelInput1{
+    display:inline;
+    line-height:40px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+}
+td{
+    width:2%;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+}
+tr{
+    width: 100%;
+
+}
+
+.inputUser{
+
+    line-height: 15%;
+    background:  none;
+    border-width: 1.2px;
+    border-style: inset;
+    border-color: #f4f6f4;
+    outline: none;
+    color: #070707;
+    width: 40%;
+    height: 25px;
+    opacity: 0.8;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 12pt;
 }

@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background: #e3e9f7;
     max-width: 100%;
 
@@ -12,6 +12,8 @@ body {
 .logo {
     width: auto;
     height: auto;
+    margin-top: 20%;
+
 
 }
 .logo img {
