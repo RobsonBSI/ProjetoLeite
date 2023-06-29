@@ -1,0 +1,27 @@
+.linkP:link {
+    color: #f5f0ef;
+    text-decoration:none;
+}
+
+/* link que foi visitado */
+.linkP:visited {
+    color:#f5f0ef;
+}
+
+/* mouse over */
+.linkP:hover {
+    color: #1cf6ce;
+}
+
+/* link selecionado */
+.linkP:active {
+    color:#f5f0ef;
+}
+.pag{
+    background-color:#003e81;
+    color: #f5f0ef;
+    text-align:center;
+    font-size:20px;
+    margin-bottom:3%;
+    font-family:Arial, Helvetica, sans-serif;
+}
