@@ -54,7 +54,7 @@
 </nav>
 <nav>
     <ul>
-        <li class="logo"><img alt="" src="imagem/logo.png" style="width:20%; height:20%"></li>
+        <li class="logo"><img alt="" src="imagem/logo3.png" style="width:60%; height:60%; padding-top:60%; padding-left:4%; "></li>
         <li>
             <a href="tabelaTipo.php"> Tabela Produtos</a>
         </li>
@@ -91,6 +91,14 @@
         $produtor = $_POST["produtor"];
         $email = isset($_POST["email"]) ? $_POST["email"] : null;
         $site = $_POST["websiter"];
+        $teste= stripos($site,"HTT");
+
+        if($teste === false){
+            if (stripos($site,"www") === 0){
+                $site ="http://".$site;
+                echo  $site;
+            }
+        }
         $instagram = $_POST["instagramProdutor"];
         $cep = $_POST["cep"];
         $logradouro = $_POST["logradouro"];
@@ -136,6 +144,14 @@
         $regiao = $_POST["regiao"];
         $telefone = $_POST["telefone"];
         $site = $_POST["site"];
+        $teste= stripos($site,"HTT");
+
+        if($teste === false){
+            if (stripos($site,"www") === 0){
+                $site ="http://".$site;
+                echo  $site;
+            }
+        }
         $cep = $_POST["cep"];
         $logradouro = $_POST["logradouro"];
         $numero = $_POST["numero"];

@@ -62,6 +62,14 @@
 
         $produtor = $_POST["produtor"];
         $site = $_POST["websiter"];
+        $teste= stripos($site,"HTT");
+
+        if($teste === false){
+            if (stripos($site,"www") === 0){
+                $site ="http://".$site;
+                echo  $site;
+            }
+        }
         $instagram = $_POST["instagramProdutor"];
         $cep = $_POST["cep"];
         $logradouro = $_POST["logradouro"];
@@ -106,6 +114,14 @@
         $regiao = $_POST["regiao"];
         $telefone = $_POST["telefone"];
         $site = $_POST["site"];
+        $teste= stripos($site,"HTT");
+
+        if($teste === false){
+            if (stripos($site,"www") === 0){
+                $site ="http://".$site;
+                echo  $site;
+            }
+        }
         $cep = $_POST["cep"];
         $logradouro = $_POST["logradouro"];
         $numero = $_POST["numero"];

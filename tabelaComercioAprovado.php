@@ -27,6 +27,7 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/MenuSecundario.css">
     <link rel="shortcut icon" type="imagem/x-icon" href="imagem/LeiteBase.png"/>
+    <link rel="stylesheet" href="css/Paginacao.css">
 </head>
 
 <body>
@@ -86,16 +87,52 @@
         <thead class="thead-dark">
         <tr class="table-success">
 
-            <th scope="col">Nome</th>
-            <th scope="col">Cidade</th>
-            <th scope="col">Estado </th>
-            <th scope="col"> Data Aprovaçã</th>
-            <th scope="col" colspan="2">tipo</th>
+            <form method="post" action="" name="" >
+                <input type="hidden" name="indentificador" value="nome">
+                <th scope="col"> <input type="submit"  class="btn btn-outline-info" value="Nome"></th>
+            </form>
+            <form method="post" action="" name="">
+                <input type="hidden" name="indentificador" value="cidade">
+                <th scope="col"><input type="submit"  class="btn btn-outline-info" value="Cidade"></th>
+            </form>
+            <form method="post" action="" name="">
+                <input type="hidden" name="indentificador" value="estado">
+                <th scope="col"> <input type="submit"  class="btn btn-outline-info" value="Estado"></th>
+            </form>
+            <form method="post" action="" name="">
+                <input type="hidden" name="indentificador" value="data_aprovacao">
+                <th scope="col" ><input type="submit"   class="btn btn-outline-info"value="Data Aprovacao"></th>
+            </form>
+            <form method="post" action="" name="">
+                <input type="hidden" name="indentificador" value="venda">
+                <th scope="col" colspan="2"><input type="submit"   class="btn btn-outline-info"value="Tipo"></th>
+            </form>
+
 
         </thead>
         <tbody>
         <?php
-            $dados = $pv->BuscarAprovacao();
+            $pag=isset($_GET["pagina"]) ? $_GET["pagina"] : null;
+
+            if($pag==null){
+                $pag = 1;
+            }
+
+            $aux =isset($_POST["indentificador"]) ? $_POST["indentificador"] : null;
+
+            if($aux==null){
+
+                $aux ="venda";
+            }
+
+            $limite=10;
+
+            $quantidade= $pv->BuscarQuantidadeRegistroPV();
+            $paginas=ceil($quantidade/$limite);
+
+            $PaginaCarregada=($pag- 1)*$limite;
+
+            $dados = $pv->BuscarAprovacaoOrdenadoPV($aux,$PaginaCarregada,$limite);
 
             if (count($dados) > 0) {
                 for ($i = 0; $i < count($dados); $i++) {
@@ -151,7 +188,19 @@
 
         </tbody>
     </table>
-
+    <div class="pag" >
+        <a href="?pagina=1" class="linkP">Primeira Pagina</a>
+        <?php if($pag > 1){ ?>
+            <a  href="?pagina=<?=$pag-1?>" class="linkP"><<</a>
+        <?php } ?>
+        <?=$pag?>
+        <?php if($pag < $paginas){ ?>
+            <a href="?pagina=<?=$pag+1?>" class="linkP">>></a>
+        <?php } ?>
+        <?php if($paginas > 1){ ?>
+        <a href="?pagina=<?=$paginas?>" class="linkP">Ultima Pagina</a>
+        <?php } ?>
+    </div>
 </div>
 </body>
 </html>

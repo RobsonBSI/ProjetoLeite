@@ -148,7 +148,7 @@
                 <input type="text" name="nome" class="inputUser " value=" <?php echo $nome; ?>">
             </div>
             <div class="tex12">
-                <label for="emailComercio" class="labelInput "> Email:</label>
+                <label for="emailComercio" class="labelInput ">Email:</label>
                 <input type="email" name="emailComercio" class="inputUser" alue=" <?php echo $email; ?>" >
             </div>
             <?php

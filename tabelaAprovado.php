@@ -18,6 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/MenuSecundario.css">
     <link rel="shortcut icon" type="imagem/x-icon" href="imagem/LeiteBase.png"/>
+    <link rel="stylesheet" href="css/Paginacao.css">
 </head>
 
 <body>
@@ -73,22 +74,54 @@
 
 
 <div style="margin-left:20%;margin-right:20%;margin-top:3%">
+    <?php
 
+        $pag=isset($_GET["pagina"]) ? $_GET["pagina"] : null;
+
+        if($pag==null){
+            $pag = 1;
+        }
+
+
+    $aux =isset($_POST["indentificador"]) ? $_POST["indentificador"] : null;
+        if($aux==null){
+
+            $aux ="data_aprovacao";
+        }
+        $limite=10;
+        $quantidade= $p->BuscarQuantidadeRegistro();
+        $paginas=ceil($quantidade/$limite);
+        $PaginaCarregada=($pag- 1)*$limite;
+
+
+    $dados = $p->BuscarAprovacaoOrdenado($aux,$PaginaCarregada,$limite);
+    ?>
 
     <table class="table">
         <thead class="thead-dark">
         <tr class="table-success">
-
-
-            <th scope="col">Nome</th>
-            <th scope="col">Cidade</th>
-            <th scope="col">Estado </th>
-            <th scope="col" colspan="2">Data Aprovação</th>
+        <form method="post" action="" name="" >
+            <input type="hidden" name="indentificador" value="nome">
+            <th scope="col"> <input type="submit"  class="btn btn-outline-info" value="Nome"></th>
+        </form> 
+        <form method="post" action="" name="">
+            <input type="hidden" name="indentificador" value="cidade">
+            <th scope="col"><input type="submit"  class="btn btn-outline-info" value="Cidade"></th> 
+        </form>  
+        <form method="post" action="" name="">
+            <input type="hidden" name="indentificador" value="estado">
+            <th scope="col"> <input type="submit"  class="btn btn-outline-info" value="Estado"></th>
+        </form> 
+        <form method="post" action="" name="">
+            <input type="hidden" name="indentificador" value="data_aprovacao">
+            <th scope="col" colspan="2"><input type="submit"   class="btn btn-outline-info"value="Data Aprovacao"></th> 
+        </form>
+           
+      
 
         </thead>
         <tbody>
         <?php
-            $dados = $p->BuscarAprovacaoP();
 
             if (count($dados) > 0) {
                 for ($i = 0; $i < count($dados); $i++) {
@@ -128,12 +161,25 @@
                     echo " </tr>";
                 }
             }
+
         ?>
 
 
         </tbody>
     </table>
-
+    <div class="pag" >
+        <a href="?pagina=1" class="linkP">Primeira Pagina</a>
+        <?php if($pag > 1){ ?>
+            <a  href="?pagina=<?=$pag-1?>" class="linkP"><<</a>
+        <?php } ?>
+        <?=$pag?>
+        <?php if($pag < $paginas){ ?>
+            <a href="?pagina=<?=$pag+1?>" class="linkP">>></a>
+        <?php } ?>
+        <?php if($paginas > 1){ ?>
+            <a href="?pagina=<?=$paginas?>" class="linkP">Ultima Pagina</a>
+        <?php } ?>
+    </div>
 </div>
 </body>
 </html>

@@ -94,17 +94,30 @@
 
 
 <?php
-    $mer=null;
-    $fei= null;
-    $onl= null;
-    $faz= null;
-    $ces=null;
+    $mer='';
+    $fei='';
+    $onl= '';
+    $ces='';
+    $faz= '';
     if (isset($_POST["envia_Mapa"])) {
+
+    }
+    if (isset($_POST["envia_Mapa"])) {
+        if (isset($_POST["fazenda"])) {
+            if ($_POST['fazenda'] == 'on') {
+                $faz = 'on';
+            }
+
+
+        }
         $mer= isset($_POST["venda"]) ? $_POST["venda"] : null;
         $fei =isset($_POST["feira"]) ? $_POST["feira"] : null;
         $onl=isset($_POST["online"]) ? $_POST["online"] : null;
-        $faz=isset($_POST["fazenda"]) ? $_POST["fazenda"] : null;
         $ces=isset($_POST["cesta"]) ? $_POST["cesta"] : null;
+    } else {
+
+        $faz='on';
+
     }
 
 ?>
@@ -408,13 +421,13 @@
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
         '<div id=\"bodyContent\" style=\" text-align:justify\">'+
-        '<p><b>Endereço: </b> " .  $localidade. "</p>' +
-        '<p><b>Contato: </b> " .  $tel1 . "</p>' +
+    
+    
         '<p><b>site: </b> " . $sit . "</p>' +
         '<p><b>Produtor: </b>".$pdr. "  </p>' +
         '<p><b>Produto: </b>".$prod. "  </p>' +
  
-       '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo Map</a></b> </p>' +
+       '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo Maps</a></b> </p>' +
         '</div>'+
         '</div>';";
                             echo "\n";
@@ -452,13 +465,13 @@
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
         '<div id=\"bodyContent\" style=\" text-align:justify\">'+
-        '<p><b>Endereço: </b> " .  $localidade. "</p>' +
-       '<p><b>Produtos: </b> </p>' +
-        '<p><b>Produtor: </b>".$pdr. "  </p>' +
+        
+    
+       '<p><b>Produtor: </b>".$pdr. "  </p>' +
       '<p><b>Produto: </b>".$prod. "  </p>' +
         '<p><b>Dias da semana que trabalha: </b> " .$sema . "</p>' +
         '<p><b>Horario Inicio: </b> " . $hI . "<b> Horario de termino:</b> " . $hT . "</p>' +
-         '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
+         '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo Maps</a></b> </p>' +
         
        
         '</div>'+
@@ -500,13 +513,13 @@
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
         '<div id=\"bodyContent\" style=\" text-align:justify\">'+
-        '<p><b>Endereço: </b> " .  $localidade. "</p>' +
-        '<p><b>Contato: </b> " .  $tel1 . "</p>' +
-        '<p><b>site: </b> " . $sit . "</p>' +
+   
+     
+         '<p><b>site: <a href=\"$sit. \"  target=\"_blank\" > </b> " .$sit. "</a> </p>' +
         '<p><b>Região de Atendimento: </b> " . $regiao1 . "</p>' +
           '<p><b>Produtor: </b>".$pdr. "  </p>' +
           '<p><b>Produto: </b>".$prod. "  </p>' +
-         '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
+         '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo Maps</a></b> </p>' +
        
         '</div>'+
         '</div>';";
@@ -548,12 +561,12 @@
         '</div>'+
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_Comercio . "</h1>'+
         '<div id=\"bodyContent\" style=\" text-align:justify\">'+
-        '<p><b>Endereço: </b> " .  $localidade. "</p>' +
         
-        '<p><b>site: </b> " . $sit . "</p>' +
+        '<p><b>site: <a href=\"$sit. \"  target=\"_blank\" > </b> " .$sit. "</a> </p>' +
+     
       '<p><b>Produto: </b>".$prod. "  </p>' +
         '<p><b>Produtor: </b>".$pdr. "  </p>' +
-        '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
+        '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat1."%2C". $long2 ."  \" target=\"_blank \"> acesse o googlo Maps</a></b> </p>' +
         '</div>'+
         '</div>';";
                             echo "\n";
@@ -609,13 +622,13 @@
         '<h1 id=\"firstHeading\" class=\"firstHeading\">" . $nome_fazenda . "</h1>'+
         '<div id=\"bodyContent\" style=\" text-align:justify\">'+
         
-        '<p><b>site: <a href=\" . $si . \"> </b> " . $si . "</a> </p>' +
+        '<p><b>site: <a href=\"$si. \"  target=\"_blank\" > </b> " . $si . "</a> </p>' +
         '<p><b>Instagran: </b> " . $ins . "</p>' +
         '<p><b>Produto Fornecido: </b>".$pro. "  </p>' +
         '<p><b>Possui venda na propriedade?: </b> " . $VF . "</p>' +
         '<p><b>Possui vendas Online?: </b> " . $VO . "</p>' +
         '<p><b>Possui turismo rural? </b> " . $tur . "</p>' +
-        '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat ."%2C". $long ."  \" target=\"_blank \"> acesse o googlo</a></b> </p>' +
+        '<p><b> <a href=\" https://www.google.com/maps/search/?api=1&query=". $lat ."%2C". $long ."  \" target=\"_blank \"> acesse o googlo Maps</a></b> </p>' +
         '</div>'+
         '</div>';";
                             echo "\n";

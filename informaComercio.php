@@ -72,6 +72,9 @@
                             if ($key == "nome") {
                                 echo "<b>nome: </b>$v  <br>";
                             }
+                            if ($key == "email") {
+                                echo "<b>email: </b>$v  <br>";
+                            }
                             if ($key == "regiao") {
                                 echo "<b>Regiao: </b>$v  <br>";
                             }
@@ -159,6 +162,9 @@
                             }
                             if ($key == "nome") {
                                 echo "<b>nome: </b>$v  <br>";
+                            }
+                            if ($key == "email") {
+                                echo "<b>email: </b>$v  <br>";
                             }
                             if ($key == "semana") {
                                 echo "<b>Dias da Semana: </b>$v  <br>";
@@ -249,6 +255,9 @@
                             if ($key == "nome") {
                                 echo "<b>nome:</b> $v  <br>";
                             }
+                            if ($key == "email") {
+                                echo "<b>email: </b>$v  <br>";
+                            }
                             if ($key == "site") {
                                 echo "<b>site:</b> $v<br>";
                             }
@@ -331,6 +340,9 @@
                             }
                             if ($key == "nome") {
                                 echo "<b>Nome:</b> $v <br>";
+                            }
+                            if ($key == "email") {
+                                echo "<b>email: </b>$v  <br>";
                             }
                             if ($key == "telefone") {
                                 echo "<b> Telefone:</b> $v  <br>";

@@ -59,6 +59,9 @@
                             if ($key == "nome") {
                                 echo "<b>Nome:</b> $v <br>";
                             }
+                            if ($key == "email") {
+                                echo "<b>email: </b>$v  <br>";
+                            }
                             if ($key == "telefone") {
                                 echo "<b> Telefone:</b> $v  <br>";
                             }

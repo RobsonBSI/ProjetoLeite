@@ -15,9 +15,9 @@ class ClassProdutor
         }
 
    }
-    public function BuscarDadosProdutor(){
+    public function BuscarDadosProdutor($aux){
         $resposta=array();
-        $comando=$this->conexao->query("select * from produtor where data_aprovacao is null");
+        $comando=$this->conexao->query("select * from produtor where data_aprovacao is null ORDER BY $aux");
         $resposta= $comando->fetchAll(PDO::FETCH_ASSOC);
         return  $resposta;
     }
@@ -62,6 +62,19 @@ class ClassProdutor
     public function BuscarAprovacaoP(){
         $resposta=array();
         $comando=$this->conexao->query("select * from produtor where data_aprovacao is not null");
+        $resposta=$comando->fetchAll(PDO::FETCH_ASSOC);
+        return $resposta;
+    }
+    public function BuscarQuantidadeRegistro(){
+
+        $comando=$this->conexao->query("select count(nome) from produtor where data_aprovacao is not null");
+        $resposta=$comando->fetch()["count"];
+        return $resposta;
+    }
+
+    public function BuscarAprovacaoOrdenado($aux,$PaginaCarregada,$limite){
+        $resposta=array();
+        $comando=$this->conexao->query("select * from produtor where data_aprovacao is not null ORDER BY $aux  LIMIT $limite OFFSET $PaginaCarregada");
         $resposta=$comando->fetchAll(PDO::FETCH_ASSOC);
         return $resposta;
     }

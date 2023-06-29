@@ -16,6 +16,14 @@
         $produtor = trim(isset($_POST["produtor"]) ? $_POST["produtor"] : null);
         $email = trim(isset($_POST["emailComercio"]) ? $_POST["emailComercio"] : null);
         $site =trim(isset($_POST["websiter"]) ? $_POST["websiter"] : null);
+        $teste= stripos($site,"HTT");
+
+        if($teste === false){
+            if (stripos($site,"www") === 0){
+                $site ="http://".$site;
+            }
+        }
+
         $instagram = trim(isset($_POST["instagramProdutor"]) ? $_POST["instagramProdutor"] : null);
         $cep =trim(isset($_POST["cep"]) ? $_POST["cep"] : null);
         $logradouro =trim(isset($_POST["logradouro"]) ? $_POST["logradouro"] : null);
@@ -46,7 +54,7 @@
         var_dump($_POST);
         $id = trim($_POST["id_PontoVenda"]);
         $nome =trim(isset($_POST["nome"]) ? $_POST["nome"] : null);
-        $email = trim(isset($_POST["email"]) ? $_POST["email"] : null);
+        $email = trim(isset($_POST["emailComercio"]) ? $_POST["emailComercio"] : null);
         $semana = trim(isset($_POST["semana"]) ? $_POST["semana"] : null);
         $inicio = trim(isset($_POST["horarioInicio"]) ? $_POST["horarioInicio"] : null);
         $termino =trim(isset($_POST["horarioTermino"]) ? $_POST["horarioTermino"] : null);

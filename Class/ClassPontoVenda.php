@@ -25,11 +25,24 @@
             $resposta = $comando->fetch(PDO::FETCH_ASSOC);
             return $resposta;
         }
-        public function BuscarPontoTabela()
+        public function BuscarPontoTabela($aux)
         {
             $resposta = array();
-            $comando = $this->conexao->query("SELECT p.id,nome,cidade,estado,cadastro,t.venda FROM pontovenda p INNER JOIN tipo t ON t.id =p.tipo_id where data_aprovacao is  null");
+            $comando = $this->conexao->query("SELECT p.id,nome,cidade,estado,cadastro,t.venda FROM pontovenda p INNER JOIN tipo t ON t.id =p.tipo_id where data_aprovacao is  null ORDER BY $aux");
             $resposta = $comando->fetchAll(PDO::FETCH_ASSOC);
+            return $resposta;
+        }
+        public function BuscarQuantidadeRegistroPV(){
+
+            $comando=$this->conexao->query("select count(nome) from pontovenda where data_aprovacao is not null");
+            $resposta=$comando->fetch()["count"];
+            return $resposta;
+        }
+
+        public function BuscarAprovacaoOrdenadoPV($aux,$PaginaCarregada,$limite){
+            $resposta=array();
+            $comando=$this->conexao->query("SELECT p.id,nome,cidade,estado,data_aprovacao,t.venda FROM pontovenda p INNER JOIN tipo t ON t.id =p.tipo_id where data_aprovacao is not null ORDER BY $aux  LIMIT $limite OFFSET $PaginaCarregada");
+            $resposta=$comando->fetchAll(PDO::FETCH_ASSOC);
             return $resposta;
         }
 
@@ -84,7 +97,7 @@
 
         public function atualizarVenda($id,$nome,$inicio,$termino,$regiao,$telefone,$site,$cep,$logradouro,$numero,$complemento,$latitude,$longitude,$cidade,$estado,$semana,$produtor,$email){
             try {
-            $comando= $this->conexao->prepare("UPDATE pontovenda SET nome=:nome,inicio=:hInicio,termino=:hTermino,regiao=:regiao,telefone=:telefone,site=:site,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,latitude=:latitude,longitude=:longitude,cidade=:cidade,estado=:estado,semana=:se,produtor=:prod,email=:email WHERE id =:id");
+            $comando= $this->conexao->prepare("UPDATE pontovenda SET nome=:nome,inicio=:hInicio,termino=:hTermino,regiao=:regiao,telefone=:telefone,site=:site,cep=:cep,logradouro=:logradouro,numero=:numero,complemento=:complemento,latitude=:latitude,longitude=:longitude,cidade=:cidade,estado=:estado,semana=:se,produtor=:prod,email=:em WHERE id =:id");
             $comando ->bindValue(':id',$id);
             $comando ->bindValue(':nome',$nome);
             $comando ->bindValue(':hInicio',$inicio);
@@ -102,7 +115,7 @@
             $comando ->bindValue(':estado',$estado);
             $comando ->bindValue(':se',$semana);
             $comando ->bindValue(':prod',$produtor);
-            $comando ->bindValue(':email',$email);
+            $comando ->bindValue(':em',$email);
             $comando ->execute();
         } catch(PDOException $e) {
                 echo 'Error: ' . $e->getMessage();

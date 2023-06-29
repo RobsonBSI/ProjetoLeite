@@ -83,15 +83,38 @@ if($id_A){
         <thead class="thead-dark">
         <tr class="table-success">
 
-            <th scope="col">Nome</th>
-            <th scope="col">Cidade</th>
-            <th scope="col">Estado </th>
-            <th scope="col" colspan="2">Data e Hora do cadastro</th>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr class="table-success">
+                    <form method="post" action="" name="" >
+                        <input type="hidden" name="indentificador" value="nome">
+                        <th scope="col"> <input type="submit"  class="btn btn-outline-info" value="Nome"></th>
+                    </form>
+                    <form method="post" action="" name="">
+                        <input type="hidden" name="indentificador" value="cidade">
+                        <th scope="col"><input type="submit"  class="btn btn-outline-info" value="Cidade"></th>
+                    </form>
+                    <form method="post" action="" name="">
+                        <input type="hidden" name="indentificador" value="estado">
+                        <th scope="col"> <input type="submit"  class="btn btn-outline-info" value="Estado"></th>
+                    </form>
+                    <form method="post" action="" name="">
+                        <input type="hidden" name="indentificador" value="cadastro">
+                        <th scope="col" colspan="2"><input type="submit"   class="btn btn-outline-info"value="Data e Hora do cadastro"></th>
+                    </form>
+
 
         </thead>
         <tbody>
     <?php
-       $dados= $p->BuscarDadosProdutor();
+        $aux =isset($_POST["indentificador"]) ? $_POST["indentificador"] : null;
+
+        if($aux==null){
+
+            $aux ="cadastro";
+        }
+       // var_dump($aux);
+       $dados= $p->BuscarDadosProdutor( $aux);
 
       if(count($dados)>0){
           for ($i=0;$i<count($dados);$i++){
